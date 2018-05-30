@@ -1,0 +1,7 @@
+/.gradle/
+/.idea/
+/gradle/
+/edslite.git.iml
+/gradlew
+/gradlew.bat
+/local.properties
