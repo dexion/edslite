@@ -150,13 +150,13 @@ public class CloseLocationsActivity extends Activity
         }
     }
 
-	@Override
-	protected void onCreate(final Bundle savedInstanceState)
-	{
+    @Override
+    protected void onCreate(final Bundle savedInstanceState)
+    {
         Util.setTheme(this);
-	    super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
         if(savedInstanceState == null)
             getFragmentManager().beginTransaction().add(new MainFragment(), MainFragment.TAG).commit();
-	}
+    }
 }

@@ -278,56 +278,56 @@ public class LocationOpenerBaseFragment extends Fragment
     @Override
     public void onResume()
     {
-    	super.onResume();
+        super.onResume();
         _resHandler.handle();
     }
 
     public TaskFragment.TaskCallbacks getOpenLocationTaskCallbacks()
-	{
-		return new OpenLocationTaskCallbacks();
-	}
+    {
+        return new OpenLocationTaskCallbacks();
+    }
 
-	protected class OpenLocationTaskCallbacks implements TaskFragment.TaskCallbacks
-	{
-		@Override
-		public void onPrepare(Bundle args)
-		{
+    protected class OpenLocationTaskCallbacks implements TaskFragment.TaskCallbacks
+    {
+        @Override
+        public void onPrepare(Bundle args)
+        {
 
-		}
+        }
 
-		@Override
-		public void onResumeUI(Bundle args)
-		{
-			_dialog = ProgressDialog.showDialog(getFragmentManager(), getString(R.string.opening_container));
-			_dialog.setCancelable(true);
-			_dialog.setOnCancelListener(new DialogInterface.OnCancelListener()
-			{
-				@Override
-				public void onCancel(DialogInterface dialog)
-				{
-					OpenLocationTaskFragment f = (OpenLocationTaskFragment) getFragmentManager().findFragmentByTag(getOpenLocationTaskTag());
-					if(f!=null)
-						f.cancel();
-				}
-			});
-		}
+        @Override
+        public void onResumeUI(Bundle args)
+        {
+            _dialog = ProgressDialog.showDialog(getFragmentManager(), getString(R.string.opening_container));
+            _dialog.setCancelable(true);
+            _dialog.setOnCancelListener(new DialogInterface.OnCancelListener()
+            {
+                @Override
+                public void onCancel(DialogInterface dialog)
+                {
+                    OpenLocationTaskFragment f = (OpenLocationTaskFragment) getFragmentManager().findFragmentByTag(getOpenLocationTaskTag());
+                    if(f!=null)
+                        f.cancel();
+                }
+            });
+        }
 
-		@Override
-		public void onSuspendUI(Bundle args)
-		{
-			_dialog.dismiss();
+        @Override
+        public void onSuspendUI(Bundle args)
+        {
+            _dialog.dismiss();
 
-		}
+        }
 
-		@Override
-		public void onCompleted(Bundle args,TaskFragment.Result result)
-		{
-			procOpenLocationTaskResult(args, result);
-		}
+        @Override
+        public void onCompleted(Bundle args,TaskFragment.Result result)
+        {
+            procOpenLocationTaskResult(args, result);
+        }
 
-		@Override
-		public void onUpdateUI(Object state)
-		{
+        @Override
+        public void onUpdateUI(Object state)
+        {
             ProgressReporter r = (ProgressReporter)state;
             if(r!=null)
             {
@@ -335,30 +335,30 @@ public class LocationOpenerBaseFragment extends Fragment
                 _dialog.setProgress(r.getProgress());
             }
 
-		}
+        }
 
-		private com.sovworks.eds.android.dialogs.ProgressDialog _dialog;
-	}
+        private com.sovworks.eds.android.dialogs.ProgressDialog _dialog;
+    }
 
-	protected final ActivityResultHandler _resHandler = new ActivityResultHandler();
+    protected final ActivityResultHandler _resHandler = new ActivityResultHandler();
 
-	protected TaskFragment getOpenLocationTask()
-	{
-		return new OpenLocationTaskFragment();
-	}
+    protected TaskFragment getOpenLocationTask()
+    {
+        return new OpenLocationTaskFragment();
+    }
 
     protected String getOpenLocationTaskTag()
     {
         return getOpenLocationTaskTag(getTargetLocation());
     }
 
-	protected Bundle initOpenLocationTaskParams(Location location)
-	{
+    protected Bundle initOpenLocationTaskParams(Location location)
+    {
         Bundle b = new Bundle();
         b.putString(OpenLocationTaskFragment.ARG_OPENER_TAG, getTag());
         LocationsManager.storePathsInBundle(b, location, null);
-		return b;
-	}
+        return b;
+    }
 
     protected Location getTargetLocation()
     {
@@ -423,12 +423,12 @@ public class LocationOpenerBaseFragment extends Fragment
         finishOpener(false, null);
     }
 
-	protected void startOpeningTask(Bundle args)
-	{
+    protected void startOpeningTask(Bundle args)
+    {
         TaskFragment f = getOpenLocationTask();
         f.setArguments(args);
         getFragmentManager().beginTransaction().add(f, getOpenLocationTaskTag()).commit();
-	}
+    }
 
     private static final String TAG = "com.sovworks.eds.android.locations.opener.fragments.LocationOpenerFragment";
 }

@@ -15,41 +15,41 @@ import java.util.List;
 
 abstract class LUKSLocationBase extends ContainerBasedLocation
 {
-	public static final String URI_SCHEME = "luks";
+    public static final String URI_SCHEME = "luks";
 
     LUKSLocationBase(Uri uri, LocationsManagerBase lm, Context context, Settings settings) throws Exception
     {
         super(uri, lm, context, settings);
     }
 
-	LUKSLocationBase(Location containerLocation, EdsContainer cont, Context context, Settings settings)
-	{
-		super(containerLocation, cont, context, settings);
-	}
+    LUKSLocationBase(Location containerLocation, EdsContainer cont, Context context, Settings settings)
+    {
+        super(containerLocation, cont, context, settings);
+    }
 
-	LUKSLocationBase(LUKSLocationBase sibling)
-	{
-		super(sibling);
-	}
-
-
-	@Override
-	public Uri getLocationUri()
-	{
-		return makeUri(URI_SCHEME).build();
-	}
+    LUKSLocationBase(LUKSLocationBase sibling)
+    {
+        super(sibling);
+    }
 
 
-	@Override
-	public List<ContainerFormatInfo> getSupportedFormats()
-	{
-		return Collections.singletonList(getContainerFormatInfo());
-	}
+    @Override
+    public Uri getLocationUri()
+    {
+        return makeUri(URI_SCHEME).build();
+    }
 
-	@Override
-	public ContainerFormatInfo getContainerFormatInfo()
-	{
-		return new FormatInfo();
-	}
+
+    @Override
+    public List<ContainerFormatInfo> getSupportedFormats()
+    {
+        return Collections.singletonList(getContainerFormatInfo());
+    }
+
+    @Override
+    public ContainerFormatInfo getContainerFormatInfo()
+    {
+        return new FormatInfo();
+    }
 
 }

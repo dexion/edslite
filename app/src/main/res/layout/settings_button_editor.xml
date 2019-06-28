@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:mode="twoLine"
-	android:descendantFocusability="blocksDescendants"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:mode="twoLine"
+    android:descendantFocusability="blocksDescendants"
     style="@style/PropertyRow">
     <LinearLayout
         android:id="@+id/title_layout"
@@ -19,8 +19,8 @@
             android:text="@string/select"
             style="?attr/propertyButtonStyle"/>
     </LinearLayout>
-	<TextView
-		android:id="@+id/desc"
-		style="@style/PropertyDesc"
-		android:layout_below="@id/title_layout"/>
+    <TextView
+        android:id="@+id/desc"
+        style="@style/PropertyDesc"
+        android:layout_below="@id/title_layout"/>
 </RelativeLayout>

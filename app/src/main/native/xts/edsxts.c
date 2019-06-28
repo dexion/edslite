@@ -77,16 +77,16 @@ static void gf_mulx(void *x)
 
 #  if UNIT_BITS == 64
 
-#   define GF_MASK  li_64(8000000000000000) 
-#   define GF_XOR   li_64(0000000000000087) 
+#   define GF_MASK  li_64(8000000000000000)
+#   define GF_XOR   li_64(0000000000000087)
     uint_64t _tt = ((UPTR_CAST(x,64)[1] & GF_MASK) ? GF_XOR : 0);
     UPTR_CAST(x,64)[1] = (UPTR_CAST(x,64)[1] << 1) | (UPTR_CAST(x,64)[0] & GF_MASK ? 1 : 0);
     UPTR_CAST(x,64)[0] = (UPTR_CAST(x,64)[0] << 1) ^ _tt;
 
 #  else /* UNIT_BITS == 32 */
 
-#   define GF_MASK  li_32(80000000) 
-#   define GF_XOR   li_32(00000087) 
+#   define GF_MASK  li_32(80000000)
+#   define GF_XOR   li_32(00000087)
     uint_32t _tt = ((UPTR_CAST(x,32)[3] & GF_MASK) ? GF_XOR : 0);;
     UPTR_CAST(x,32)[3] = (UPTR_CAST(x,32)[3] << 1) | (UPTR_CAST(x,32)[2] & GF_MASK ? 1 : 0);
     UPTR_CAST(x,32)[2] = (UPTR_CAST(x,32)[2] << 1) | (UPTR_CAST(x,32)[1] & GF_MASK ? 1 : 0);
@@ -100,27 +100,27 @@ static void gf_mulx(void *x)
 #  if UNIT_BITS == 64
 
 #   define MASK_01  li_64(0101010101010101)
-#   define GF_MASK  li_64(0000000000000080) 
-#   define GF_XOR   li_64(8700000000000000) 
+#   define GF_MASK  li_64(0000000000000080)
+#   define GF_XOR   li_64(8700000000000000)
     uint_64t _tt = ((UPTR_CAST(x,64)[1] & GF_MASK) ? GF_XOR : 0);
-    UPTR_CAST(x,64)[1] =  ((UPTR_CAST(x,64)[1] << 1) & ~MASK_01) 
+    UPTR_CAST(x,64)[1] =  ((UPTR_CAST(x,64)[1] << 1) & ~MASK_01)
         | (((UPTR_CAST(x,64)[1] >> 15) | (UPTR_CAST(x,64)[0] << 49)) & MASK_01);
-    UPTR_CAST(x,64)[0] = (((UPTR_CAST(x,64)[0] << 1) & ~MASK_01) 
+    UPTR_CAST(x,64)[0] = (((UPTR_CAST(x,64)[0] << 1) & ~MASK_01)
         |  ((UPTR_CAST(x,64)[0] >> 15) & MASK_01)) ^ _tt;
 
 #  else /* UNIT_BITS == 32 */
 
 #   define MASK_01  li_32(01010101)
-#   define GF_MASK  li_32(00000080) 
-#   define GF_XOR   li_32(87000000) 
+#   define GF_MASK  li_32(00000080)
+#   define GF_XOR   li_32(87000000)
     uint_32t _tt = ((UPTR_CAST(x,32)[3] & GF_MASK) ? GF_XOR : 0);
-    UPTR_CAST(x,32)[3] =  ((UPTR_CAST(x,32)[3] << 1) & ~MASK_01) 
+    UPTR_CAST(x,32)[3] =  ((UPTR_CAST(x,32)[3] << 1) & ~MASK_01)
         | (((UPTR_CAST(x,32)[3] >> 15) | (UPTR_CAST(x,32)[2] << 17)) & MASK_01);
-    UPTR_CAST(x,32)[2] =  ((UPTR_CAST(x,32)[2] << 1) & ~MASK_01) 
+    UPTR_CAST(x,32)[2] =  ((UPTR_CAST(x,32)[2] << 1) & ~MASK_01)
         | (((UPTR_CAST(x,32)[2] >> 15) | (UPTR_CAST(x,32)[1] << 17)) & MASK_01);
-    UPTR_CAST(x,32)[1] =  ((UPTR_CAST(x,32)[1] << 1) & ~MASK_01) 
+    UPTR_CAST(x,32)[1] =  ((UPTR_CAST(x,32)[1] << 1) & ~MASK_01)
         | (((UPTR_CAST(x,32)[1] >> 15) |   (UPTR_CAST(x,32)[0] << 17)) & MASK_01);
-    UPTR_CAST(x,32)[0] = (((UPTR_CAST(x,32)[0] << 1) & ~MASK_01) 
+    UPTR_CAST(x,32)[0] = (((UPTR_CAST(x,32)[0] << 1) & ~MASK_01)
         |  ((UPTR_CAST(x,32)[0] >> 15) & MASK_01)) ^ _tt;
 
 #  endif
@@ -130,11 +130,11 @@ static void gf_mulx(void *x)
 
 static void xts_encrypt_sector(const block_cipher_interface *cipherA, const block_cipher_interface *cipherB, uint8_t *buffer, int length, uint64_t start_sector)
 {
-	buf_type hh;
+    buf_type hh;
     uint8_t *pos = buffer, *hi = buffer + length;
 
     xor_function f_ptr = (!ALIGN_OFFSET(buffer, UNIT_BITS >> 3) ? xor_block_aligned : xor_block );
-    
+
 #if defined( LONG_LBA )
     *UPTR_CAST(hh, 64) = start_sector;
     memset(UPTR_CAST(hh, 8) + 8, 0, 8);
@@ -150,7 +150,7 @@ static void xts_encrypt_sector(const block_cipher_interface *cipherA, const bloc
     while(pos + BYTES_PER_XTS_BLOCK <= hi)
     {
         f_ptr(pos, pos, hh);
-        cipherA->encrypt(pos,pos,cipherA->context);        
+        cipherA->encrypt(pos,pos,cipherA->context);
         f_ptr(pos, pos, hh);
         pos += BYTES_PER_XTS_BLOCK;
         gf_mulx(hh);
@@ -173,7 +173,7 @@ static void xts_encrypt_sector(const block_cipher_interface *cipherA, const bloc
 
 static void xts_decrypt_sector(const block_cipher_interface *cipherA, const block_cipher_interface *cipherB, uint8_t *buffer, int length, uint64_t start_sector)
 {
-	buf_type hh, hh2;
+    buf_type hh, hh2;
     uint8_t *pos = buffer, *hi = buffer + length;
 
     xor_function f_ptr = (!ALIGN_OFFSET(buffer, UNIT_BITS >> 3) ? xor_block_aligned : xor_block );
@@ -221,31 +221,31 @@ static void xts_decrypt_sector(const block_cipher_interface *cipherA, const bloc
 
 static void free_cipher_list(cipher_pair *ciphers_head)
 {
-	if(ciphers_head!=NULL)
-	{
-		if(ciphers_head->next!=NULL)
-			free_cipher_list((cipher_pair *)ciphers_head->next);
-		free(ciphers_head);
-	}
+    if(ciphers_head!=NULL)
+    {
+        if(ciphers_head->next!=NULL)
+            free_cipher_list((cipher_pair *)ciphers_head->next);
+        free(ciphers_head);
+    }
 }
 
 static cipher_pair *attach_ciphers(cipher_pair *tail,block_cipher_interface *cipherA,block_cipher_interface *cipherB)
 {
-	cipher_pair *cp = (cipher_pair *)malloc(sizeof(cipher_pair));
-	cp->next = NULL;
-	cp->prev = tail;
-	if(tail!=NULL)
-		tail->next = cp;
-	cp->cipherA = cipherA;
-	cp->cipherB = cipherB;
-	return cp;
+    cipher_pair *cp = (cipher_pair *)malloc(sizeof(cipher_pair));
+    cp->next = NULL;
+    cp->prev = tail;
+    if(tail!=NULL)
+        tail->next = cp;
+    cp->cipherA = cipherA;
+    cp->cipherB = cipherB;
+    return cp;
 }
 
 static void attach_ciphers_to_tail(xts_context *ctx,block_cipher_interface *cipherA,block_cipher_interface *cipherB)
 {
-	ctx->ciphers_tail = attach_ciphers(ctx->ciphers_tail,cipherA,cipherB);
-	if(ctx->ciphers_head == NULL)
-		ctx->ciphers_head = ctx->ciphers_tail;
+    ctx->ciphers_tail = attach_ciphers(ctx->ciphers_tail,cipherA,cipherB);
+    if(ctx->ciphers_head == NULL)
+        ctx->ciphers_head = ctx->ciphers_tail;
 }
 
 static int is_buffer_empty(uint8_t *buf)
@@ -261,7 +261,7 @@ void xts_encrypt(xts_context *context, uint8_t *data, int offset, int length, ui
 {
     uint64_t sector_index;
     uint8_t *cur;
-    cipher_pair *cp = context->ciphers_head;  
+    cipher_pair *cp = context->ciphers_head;
     int left, incr;
 
     while(cp!=NULL)
@@ -274,14 +274,14 @@ void xts_encrypt(xts_context *context, uint8_t *data, int offset, int length, ui
                 xts_encrypt_sector(cp->cipherA, cp->cipherB, cur, incr, sector_index);
         }
         cp = cp->next;
-    } 
+    }
 }
 
 void xts_decrypt(xts_context *context, uint8_t *data, int offset, int length, uint64_t start_sector_index)
 {
     uint64_t sector_index;
     uint8_t *cur;
-    cipher_pair *cp = context->ciphers_tail;  
+    cipher_pair *cp = context->ciphers_tail;
     int left, incr;
 
     while(cp!=NULL)
@@ -292,48 +292,48 @@ void xts_decrypt(xts_context *context, uint8_t *data, int offset, int length, ui
                 incr = left;
             if(!context->allow_skip || !is_buffer_empty(cur))
                 xts_decrypt_sector(cp->cipherA, cp->cipherB, cur, incr, sector_index);
-        }  
+        }
         cp = cp->prev;
     }
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 {
-	return JNI_VERSION_1_2;
+    return JNI_VERSION_1_2;
 }
 
 
 JNIEXPORT void JNICALL Java_com_sovworks_eds_crypto_modes_XTS_attachNativeCipher(JNIEnv *env, jobject obj, jlong context, jlong cipherAPtr, jlong cipherBPtr)
 {
-	xts_context *ctx = (xts_context *)context;
-	attach_ciphers_to_tail(ctx,(block_cipher_interface *)cipherAPtr,(block_cipher_interface *)cipherBPtr);
+    xts_context *ctx = (xts_context *)context;
+    attach_ciphers_to_tail(ctx,(block_cipher_interface *)cipherAPtr,(block_cipher_interface *)cipherBPtr);
 }
 
 JNIEXPORT jint JNICALL Java_com_sovworks_eds_crypto_modes_XTS_encrypt(JNIEnv *env, jobject obj, jbyteArray data, jint offset, jint length, jlong sector, jlong context)
 {
-	jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
-	if(raw_data == NULL)
-		return -1;
+    jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
+    if(raw_data == NULL)
+        return -1;
     xts_encrypt((xts_context *)context,(uint8_t *)raw_data, offset, length, (uint64_t)sector);
-	(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
-	return 0;
+    (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+    return 0;
 }
 
 JNIEXPORT jint JNICALL Java_com_sovworks_eds_crypto_modes_XTS_decrypt(JNIEnv *env, jobject obj, jbyteArray data, jint offset, jint length, jlong sector, jlong context)
-{	
-	jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
-	if(raw_data == NULL)
-		return -1;
+{
+    jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
+    if(raw_data == NULL)
+        return -1;
     xts_decrypt((xts_context *)context,(uint8_t *)raw_data, offset, length, (uint64_t)sector);
-	(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
-	return 0;
+    (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+    return 0;
 }
 
 JNIEXPORT void JNICALL Java_com_sovworks_eds_crypto_modes_XTS_closeContext(JNIEnv *env, jobject obj, jlong context)
 {
-	if((void *)context!=NULL)
-	{
-		free_cipher_list(((xts_context *)context)->ciphers_head);
-		free((void *)context);
-	}
+    if((void *)context!=NULL)
+    {
+        free_cipher_list(((xts_context *)context)->ciphers_head);
+        free((void *)context);
+    }
 }

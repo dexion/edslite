@@ -13,15 +13,15 @@ import com.sovworks.eds.locations.EDSLocation;
 public class CloseContainerTask extends ServiceTaskWithNotificationBase
 {
 
-	@Override
-	public Object doWork(Context context, Intent i) throws Throwable
-	{
-		super.doWork(context, i);
-		EDSLocation cont = (EDSLocation) LocationsManager.getLocationsManager(context).getFromIntent(i, null);
-		if(cont!=null)
-			OMLocationCloserFragment.unmountAndClose(context, cont, UserSettings.getSettings(context).alwaysForceClose());
-		return null;
-	}
+    @Override
+    public Object doWork(Context context, Intent i) throws Throwable
+    {
+        super.doWork(context, i);
+        EDSLocation cont = (EDSLocation) LocationsManager.getLocationsManager(context).getFromIntent(i, null);
+        if(cont!=null)
+            OMLocationCloserFragment.unmountAndClose(context, cont, UserSettings.getSettings(context).alwaysForceClose());
+        return null;
+    }
 
     @Override
     protected NotificationCompat.Builder initNotification()

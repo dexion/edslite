@@ -58,7 +58,7 @@
 
 /*  Use of inlines is preferred but code blocks can also be expanded inline
     using 'defines'.  But the latter approach will typically generate a LOT
-    of code and is not recommended. 
+    of code and is not recommended.
 */
 #if 1 && !defined( USE_INLINING )
 #  define USE_INLINING
@@ -106,29 +106,29 @@ extern "C" {
 #define BUF_INC          (UNIT_BITS >> 3)
 #define BUF_ADRMASK     ((UNIT_BITS >> 3) - 1)
 
-#define rep2_u2(f,r,x)    f( 0,r,x); f( 1,r,x) 
-#define rep2_u4(f,r,x)    f( 0,r,x); f( 1,r,x); f( 2,r,x); f( 3,r,x) 
+#define rep2_u2(f,r,x)    f( 0,r,x); f( 1,r,x)
+#define rep2_u4(f,r,x)    f( 0,r,x); f( 1,r,x); f( 2,r,x); f( 3,r,x)
 #define rep2_u16(f,r,x)   f( 0,r,x); f( 1,r,x); f( 2,r,x); f( 3,r,x); \
                           f( 4,r,x); f( 5,r,x); f( 6,r,x); f( 7,r,x); \
                           f( 8,r,x); f( 9,r,x); f(10,r,x); f(11,r,x); \
                           f(12,r,x); f(13,r,x); f(14,r,x); f(15,r,x)
 
-#define rep2_d2(f,r,x)    f( 1,r,x); f( 0,r,x) 
-#define rep2_d4(f,r,x)    f( 3,r,x); f( 2,r,x); f( 1,r,x); f( 0,r,x) 
+#define rep2_d2(f,r,x)    f( 1,r,x); f( 0,r,x)
+#define rep2_d4(f,r,x)    f( 3,r,x); f( 2,r,x); f( 1,r,x); f( 0,r,x)
 #define rep2_d16(f,r,x)   f(15,r,x); f(14,r,x); f(13,r,x); f(12,r,x); \
                           f(11,r,x); f(10,r,x); f( 9,r,x); f( 8,r,x); \
                           f( 7,r,x); f( 6,r,x); f( 5,r,x); f( 4,r,x); \
                           f( 3,r,x); f( 2,r,x); f( 1,r,x); f( 0,r,x)
 
-#define rep3_u2(f,r,x,y)  f( 0,r,x,y); f( 1,r,x,y) 
-#define rep3_u4(f,r,x,y)  f( 0,r,x,y); f( 1,r,x,y); f( 2,r,x,y); f( 3,r,x,y) 
+#define rep3_u2(f,r,x,y)  f( 0,r,x,y); f( 1,r,x,y)
+#define rep3_u4(f,r,x,y)  f( 0,r,x,y); f( 1,r,x,y); f( 2,r,x,y); f( 3,r,x,y)
 #define rep3_u16(f,r,x,y) f( 0,r,x,y); f( 1,r,x,y); f( 2,r,x,y); f( 3,r,x,y); \
                           f( 4,r,x,y); f( 5,r,x,y); f( 6,r,x,y); f( 7,r,x,y); \
                           f( 8,r,x,y); f( 9,r,x,y); f(10,r,x,y); f(11,r,x,y); \
                           f(12,r,x,y); f(13,r,x,y); f(14,r,x,y); f(15,r,x,y)
 
-#define rep3_d2(f,r,x,y)  f( 1,r,x,y); f( 0,r,x,y) 
-#define rep3_d4(f,r,x,y)  f( 3,r,x,y); f( 2,r,x,y); f( 1,r,x,y); f( 0,r,x,y) 
+#define rep3_d2(f,r,x,y)  f( 1,r,x,y); f( 0,r,x,y)
+#define rep3_d4(f,r,x,y)  f( 3,r,x,y); f( 2,r,x,y); f( 1,r,x,y); f( 0,r,x,y)
 #define rep3_d16(f,r,x,y) f(15,r,x,y); f(14,r,x,y); f(13,r,x,y); f(12,r,x,y); \
                           f(11,r,x,y); f(10,r,x,y); f( 9,r,x,y); f( 8,r,x,y); \
                           f( 7,r,x,y); f( 6,r,x,y); f( 5,r,x,y); f( 4,r,x,y); \
@@ -186,12 +186,12 @@ mh_decl uint_32t bswap_32(uint_32t x)
 
 #if !defined(bswap_64)
 mh_decl uint_64t bswap_64(uint_64t x)
-{   
+{
     return bswap_32((uint_32t)(x >> 32)) | ((uint_64t)bswap_32((uint_32t)x) << 32);
 }
 #endif
-/* support for fast aligned buffer move, xor and byte swap operations - 
-   source and destination buffers for move and xor operations must not 
+/* support for fast aligned buffer move, xor and byte swap operations -
+   source and destination buffers for move and xor operations must not
    overlap, those for byte order revesal must either not overlap or
    must be identical
 */
@@ -268,7 +268,7 @@ mh_decl void bswap64_block(void *d, const void* s)
     t = bswap_32(UNIT_PTR(s)[0]); UNIT_PTR(d)[0] = bswap_32(UNIT_PTR(s)[1]); UNIT_PTR(d)[1] = t;
     t = bswap_32(UNIT_PTR(s)[2]); UNIT_PTR(d)[2] = bswap_32(UNIT_PTR(s)[2]); UNIT_PTR(d)[3] = t;
 #else
-    UNIT_PTR(d)[0] = bswap_64(UNIT_PTR(s)[0]);  UNIT_PTR(d)[1] = bswap_64(UNIT_PTR(s)[1]); 
+    UNIT_PTR(d)[0] = bswap_64(UNIT_PTR(s)[0]);  UNIT_PTR(d)[1] = bswap_64(UNIT_PTR(s)[1]);
 #endif
 }
 

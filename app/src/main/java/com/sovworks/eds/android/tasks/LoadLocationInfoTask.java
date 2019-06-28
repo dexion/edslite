@@ -15,13 +15,13 @@ public class LoadLocationInfoTask extends TaskFragment
 {
     public static final String TAG = "com.sovworks.eds.android.tasks.LoadLocationInfoTask";
 
-	public static LoadLocationInfoTask newInstance(EDSLocation location)
+    public static LoadLocationInfoTask newInstance(EDSLocation location)
     {
         Bundle args = new Bundle();
         LocationsManager.storePathsInBundle(args, location, null);
         LoadLocationInfoTask f = new LoadLocationInfoTask();
         f.setArguments(args);
-		return f;
+        return f;
     }
 
     @Override
@@ -37,10 +37,10 @@ public class LoadLocationInfoTask extends TaskFragment
         EDSLocation cont = (EDSLocation) LocationsManager.getLocationsManager(_context).getFromBundle(getArguments(), null);
         EDSLocationSettingsFragment.LocationInfo info = initParams();
         fillInfo(cont, info);
-		state.setResult(info);
-	}
+        state.setResult(info);
+    }
 
-	@Override
+    @Override
     protected TaskCallbacks getTaskCallbacks(Activity activity)
     {
         final EDSLocationSettingsFragment f = (EDSLocationSettingsFragment) getFragmentManager().findFragmentByTag(SettingsBaseActivity.SETTINGS_FRAGMENT_TAG);

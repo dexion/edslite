@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="FileName">
-		<item name="android:textSize">@dimen/main_text</item>
+        <item name="android:textSize">@dimen/main_text</item>
         <item name="android:textColor">?attr/mainTextColor</item>
         <item name="android:layout_width">0dp</item>
-		<item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="FileIcon">
         <item name="android:layout_width">40dp</item>
@@ -13,10 +13,10 @@
         <item name="android:contentDescription">@string/select_file</item>
     </style>
     <style name="FileDesc">
-    	<item name="android:textSize">10sp</item>
-		<item name="android:textColor">?attr/secTextColor</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">?attr/secTextColor</item>
         <item name="android:layout_width">0dp</item>
-		<item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="MiniIcon">
         <item name="android:layout_width">10dp</item>
@@ -68,12 +68,12 @@
     <style name="SelectedFileEditText">
         <item name="android:textColor">?attr/mainTextColor</item>
         <item name="android:textSize">@dimen/main_text</item>
-       	<item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
-       	<item name="android:inputType">text</item>
-       	<item name="android:lines">1</item>
-       	<item name="android:maxLines">1</item>
-       	<item name="android:layout_margin">2dp</item>
+        <item name="android:inputType">text</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_margin">2dp</item>
     </style>
     <style name="MainFrame">
         <item name="android:layout_width">0dp</item>

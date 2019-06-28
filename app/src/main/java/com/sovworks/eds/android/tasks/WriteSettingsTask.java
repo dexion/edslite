@@ -18,15 +18,15 @@ public class WriteSettingsTask extends TaskFragment
     public static final String TAG = "com.sovworks.eds.android.tasks.WriteSettingsTask";
     public static final String ARG_FIN_ACTIVITY = "com.sovworks.eds.android.FIN_ACTIVITY";
 
-	public static WriteSettingsTask newInstance(EDSLocation cont, boolean finActivity)
+    public static WriteSettingsTask newInstance(EDSLocation cont, boolean finActivity)
     {
         Bundle args = new Bundle();
         args.putBoolean(ARG_FIN_ACTIVITY, finActivity);
         LocationsManager.storePathsInBundle(args, cont, null);
-		WriteSettingsTask f = new WriteSettingsTask();
+        WriteSettingsTask f = new WriteSettingsTask();
         f.setArguments(args);
         return f;
-	}
+    }
 
     @Override
     protected void initTask(Activity activity)
@@ -41,9 +41,9 @@ public class WriteSettingsTask extends TaskFragment
     protected void doWork(TaskState state) throws Exception
     {
         EDSLocation cont = (EDSLocation) LocationsManager.getLocationsManager(_context).getFromBundle(getArguments(), null);
-		cont.applyInternalSettings();
+        cont.applyInternalSettings();
         cont.writeInternalSettings();
-	}
+    }
 
     @Override
     protected TaskCallbacks getTaskCallbacks(Activity activity)

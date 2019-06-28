@@ -133,27 +133,27 @@ public class LocationCloserBaseFragment extends Fragment
     @Override
     public void onResume()
     {
-    	super.onResume();
+        super.onResume();
         _resHandler.handle();
     }
 
 
     public TaskFragment.TaskCallbacks getCloseLocationTaskCallbacks()
-	{
-		return new CloseLocationTaskCallbacks();
-	}
+    {
+        return new CloseLocationTaskCallbacks();
+    }
 
-	protected class CloseLocationTaskCallbacks implements TaskFragment.TaskCallbacks
-	{
-		@Override
-		public void onPrepare(Bundle args)
-		{
+    protected class CloseLocationTaskCallbacks implements TaskFragment.TaskCallbacks
+    {
+        @Override
+        public void onPrepare(Bundle args)
+        {
 
-		}
+        }
 
-		@Override
-		public void onResumeUI(Bundle args)
-		{
+        @Override
+        public void onResumeUI(Bundle args)
+        {
             Activity activity = getActivity();
             _dialog = new ProgressDialog(activity);
             _dialog.setMessage (activity.getText(R.string.closing));
@@ -170,36 +170,36 @@ public class LocationCloserBaseFragment extends Fragment
                 }
             });
             _dialog.show();
-		}
+        }
 
-		@Override
-		public void onSuspendUI(Bundle args)
-		{
-			_dialog.dismiss();
+        @Override
+        public void onSuspendUI(Bundle args)
+        {
+            _dialog.dismiss();
 
-		}
+        }
 
-		@Override
-		public void onCompleted(Bundle args,TaskFragment.Result result)
-		{
-			procCloseLocationTaskResult(args, result);
-		}
+        @Override
+        public void onCompleted(Bundle args,TaskFragment.Result result)
+        {
+            procCloseLocationTaskResult(args, result);
+        }
 
-		@Override
-		public void onUpdateUI(Object state)
-		{
+        @Override
+        public void onUpdateUI(Object state)
+        {
 
-		}
+        }
 
-		private ProgressDialog _dialog;
-	}
+        private ProgressDialog _dialog;
+    }
 
-	protected final ActivityResultHandler _resHandler = new ActivityResultHandler();
+    protected final ActivityResultHandler _resHandler = new ActivityResultHandler();
 
-	protected TaskFragment getCloseLocationTask()
-	{
-		return new CloseLocationTaskFragment();
-	}
+    protected TaskFragment getCloseLocationTask()
+    {
+        return new CloseLocationTaskFragment();
+    }
 
     protected String getCloseLocationTaskTag()
     {
@@ -212,14 +212,14 @@ public class LocationCloserBaseFragment extends Fragment
     }
 
     protected Bundle initCloseLocationTaskParams(Location location)
-	{
+    {
         Bundle b = new Bundle();
         b.putString(CloseLocationTaskFragment.ARG_CLOSER_TAG, getTag());
         if(getArguments().containsKey(ARG_FORCE_CLOSE))
             b.putBoolean(ARG_FORCE_CLOSE, getArguments().getBoolean(ARG_FORCE_CLOSE, false));
         LocationsManager.storePathsInBundle(b, location, null);
-		return b;
-	}
+        return b;
+    }
 
     protected Location getTargetLocation()
     {
@@ -238,8 +238,8 @@ public class LocationCloserBaseFragment extends Fragment
             onLocationNotClosed(location, closeTaskArgs);
     }
 
-	protected void onLocationClosed(Location location, Bundle closeTaskArgs)
-	{
+    protected void onLocationClosed(Location location, Bundle closeTaskArgs)
+    {
         String recTag = getArguments()!=null ? getArguments().getString(PARAM_RECEIVER_FRAGMENT_TAG) : null;
         if(recTag != null)
         {
@@ -247,7 +247,7 @@ public class LocationCloserBaseFragment extends Fragment
             if(rec!=null)
                 rec.onTargetLocationClosed(location, closeTaskArgs);
         }
-	}
+    }
 
     protected void onLocationNotClosed(Location location, Bundle closeTaskArgs)
     {
@@ -293,12 +293,12 @@ public class LocationCloserBaseFragment extends Fragment
 
     }
 
-	protected void startClosingTask(Bundle args)
-	{
+    protected void startClosingTask(Bundle args)
+    {
         TaskFragment f = getCloseLocationTask();
         f.setArguments(args);
         getFragmentManager().beginTransaction().add(f, getCloseLocationTaskTag()).commit();
-	}
+    }
 
     private static final String TAG = "com.sovworks.eds.android.locations.closer.fragments.LocationCloserBaseFragment";
 }

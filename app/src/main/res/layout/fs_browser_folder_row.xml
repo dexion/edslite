@@ -19,23 +19,23 @@
         style="@style/MiniIcon"
         tools:ignore="ContentDescription"/>
     <CheckBox
-		android:id="@android:id/checkbox"
+        android:id="@android:id/checkbox"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-		style="?attr/fmCheckBoxStyle"/>
+        style="?attr/fmCheckBoxStyle"/>
     <RadioButton
-		android:id="@+id/radio"
+        android:id="@+id/radio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         style="?attr/fmRadioStyle"/>
     <TextView
-		android:id="@android:id/text1"
+        android:id="@android:id/text1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@android:id/icon1"
         android:layout_toEndOf="@android:id/icon1"
-		style="@style/FileName" />
+        style="@style/FileName" />
 </RelativeLayout>

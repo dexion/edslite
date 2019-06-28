@@ -69,10 +69,10 @@ public class LocationOpenerFragmentCommon extends LocationOpenerBaseFragment imp
     }
 
     @Override
-	protected TaskFragment getOpenLocationTask()
-	{
-		return new OpenLocationTaskFragment();
-	}
+    protected TaskFragment getOpenLocationTask()
+    {
+        return new OpenLocationTaskFragment();
+    }
 
     protected Bundle getAskPasswordArgs()
     {
@@ -129,13 +129,13 @@ public class LocationOpenerFragmentCommon extends LocationOpenerBaseFragment imp
     }
 
     protected void usePassword(Bundle passwordDialogResultBundle)
-	{
+    {
         Bundle args = initOpenLocationTaskParams(getTargetLocation());
         updateOpenLocationTaskParams(args, passwordDialogResultBundle);
-		startOpeningTask(args);
-	}
+        startOpeningTask(args);
+    }
 
-	protected void updateOpenLocationTaskParams(Bundle args, Bundle passwordDialogResultBundle)
+    protected void updateOpenLocationTaskParams(Bundle args, Bundle passwordDialogResultBundle)
     {
         if(passwordDialogResultBundle.containsKey(Openable.PARAM_PASSWORD))
         {
@@ -147,7 +147,7 @@ public class LocationOpenerFragmentCommon extends LocationOpenerBaseFragment imp
             args.putInt(Openable.PARAM_KDF_ITERATIONS, passwordDialogResultBundle.getInt(Openable.PARAM_KDF_ITERATIONS));
     }
 
-	protected void askPassword()
+    protected void askPassword()
     {
         PasswordDialog pd = new PasswordDialog();
         pd.setArguments(getAskPasswordArgs());

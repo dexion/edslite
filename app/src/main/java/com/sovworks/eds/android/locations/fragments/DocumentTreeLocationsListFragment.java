@@ -72,7 +72,7 @@ public class DocumentTreeLocationsListFragment extends LocationListBaseFragment
     protected void loadLocations()
     {
         _locationsList.clear();
-		for(Location loc: LocationsManager.getLocationsManager(getActivity()).getLoadedLocations(true))
+        for(Location loc: LocationsManager.getLocationsManager(getActivity()).getLoadedLocations(true))
             if(loc instanceof DocumentTreeLocation)
             {
                 LocationInfo li = new LocationInfo((DocumentTreeLocation) loc);

@@ -5,11 +5,11 @@ import com.sovworks.eds.exceptions.ApplicationException;
 public class OperationCancelledException extends ApplicationException
 {
 
-	public OperationCancelledException()
-	{
-		
-	}
+    public OperationCancelledException()
+    {
 
-	private static final long serialVersionUID = 1L;
+    }
+
+    private static final long serialVersionUID = 1L;
 
 }

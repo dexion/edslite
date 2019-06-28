@@ -14,24 +14,24 @@ import com.sovworks.eds.locations.Location;
 public abstract class AddExistingEDSLocationTaskFragment extends TaskFragment
 {
 
-	@Override
-	public void initTask(Activity activity)
-	{
-		_context = activity.getApplicationContext();
-	}
+    @Override
+    public void initTask(Activity activity)
+    {
+        _context = activity.getApplicationContext();
+    }
 
     protected static final String ARG_STORE_LINK = "com.sovworks.eds.android.STORE_LINK";
-	protected Context _context;
+    protected Context _context;
 
     @Override
     protected void doWork(TaskState state) throws Exception
     {
-		LocationsManager lm = LocationsManager.getLocationsManager(_context);
+        LocationsManager lm = LocationsManager.getLocationsManager(_context);
         Location location = lm.getFromBundle(getArguments(), null);
         state.setResult(findOrCreateEDSLocation(lm, location, getArguments().getBoolean(ARG_STORE_LINK)));
     }
 
-	@Override
+    @Override
     protected TaskCallbacks getTaskCallbacks(Activity activity)
     {
         CreateEDSLocationFragment f = (CreateEDSLocationFragment) getFragmentManager().findFragmentByTag(SettingsBaseActivity.SETTINGS_FRAGMENT_TAG);
@@ -62,10 +62,10 @@ public abstract class AddExistingEDSLocationTaskFragment extends TaskFragment
             loc.saveExternalSettings();
     }
 
-	protected void addEDSLocation(LocationsManager lm, EDSLocation loc, boolean storeLink) throws Exception
+    protected void addEDSLocation(LocationsManager lm, EDSLocation loc, boolean storeLink) throws Exception
     {
         lm.replaceLocation(loc, loc, storeLink);
-	}
+    }
 
-	protected abstract EDSLocation createEDSLocation(Location locationLocation) throws Exception;
+    protected abstract EDSLocation createEDSLocation(Location locationLocation) throws Exception;
 }

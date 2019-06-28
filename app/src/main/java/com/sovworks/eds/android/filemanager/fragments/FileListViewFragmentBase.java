@@ -95,12 +95,12 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     public static final String ARG_SCROLL_POSITION = "com.sovworks.eds.android.SCROLL_POSITION";
 
     public static ArrayList<Path> getPathsFromRecords(List<? extends BrowserRecord> records)
-	{
-		ArrayList<Path> res = new ArrayList<>();
-		for(BrowserRecord rec: records)
-			res.add(rec.getPath());
-		return res;
-	}
+    {
+        ArrayList<Path> res = new ArrayList<>();
+        for(BrowserRecord rec: records)
+            res.add(rec.getPath());
+        return res;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -257,8 +257,8 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     @Override
-	public boolean onOptionsItemSelected(MenuItem menuItem)
-	{
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {
         MenuHandlerInfo mhi = new MenuHandlerInfo();
         mhi.menuItemId = menuItem.getItemId();
         boolean res = handleMenu(mhi);
@@ -349,11 +349,11 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     public void renameFile(String path, String newName)
     {
         try
-		{
-			final Location loc = getRealLocation();
-			Path curPath = loc.getFS().getPath(path);
-			Location srcLoc = loc.copy();
-			srcLoc.setCurrentPath(curPath);
+        {
+            final Location loc = getRealLocation();
+            Path curPath = loc.getFS().getPath(path);
+            Location srcLoc = loc.copy();
+            srcLoc.setCurrentPath(curPath);
             getFragmentManager().
                     beginTransaction().
                     add(
@@ -361,11 +361,11 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
                             RenameFileTask.TAG
                     ).
                     commit();
-		}
-		catch (IOException e)
-		{
-			Logger.showAndLog(getActivity(), e);
-		}
+        }
+        catch (IOException e)
+        {
+            Logger.showAndLog(getActivity(), e);
+        }
     }
 
     @Override
@@ -772,7 +772,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     protected ArrayList<BrowserRecord> getSelectedFiles()
-	{
+    {
         ArrayList<BrowserRecord> selectedRecordsList = new ArrayList<>();
         ListView lv = getListView();
         int count = lv.getCount();
@@ -783,7 +783,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
                 selectedRecordsList.add(file);
         }
         return selectedRecordsList;
-	}
+    }
 
     protected Collection<BrowserRecord> getSelectableFiles()
     {
@@ -800,9 +800,9 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     protected ArrayList<Path> getSelectedPaths()
-	{
-		return getPathsFromRecords(getSelectedFiles());
-	}
+    {
+        return getPathsFromRecords(getSelectedFiles());
+    }
 
     protected boolean haveSelectedFiles()
     {
@@ -1006,9 +1006,9 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     protected Location getRealLocation()
-	{
-		return getFileManagerActivity().getRealLocation();
-	}
+    {
+        return getFileManagerActivity().getRealLocation();
+    }
 
     protected boolean isSelectAction()
     {
@@ -1044,7 +1044,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }*/
 
     protected void chooseFilesForOperation()
-	{
+    {
         /*ContentResolver cr = getActivity().getContentResolver();
         cr.delete(MainContentProvider.getCurrentSelectionUri(), null, null);
         ArrayList<Path> recs = getSelectedPaths();
@@ -1057,7 +1057,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
         ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setPrimaryClip(ClipData.newUri(cr, recs.size() + " files are in clipboard", MainContentProvider.getCurrentSelectionUri()));
         getActivity().invalidateOptionsMenu();*/
-		getFragmentManager().
+        getFragmentManager().
                 beginTransaction().
                 add(
                         CopyToClipboardTask.newInstance(
@@ -1067,7 +1067,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
                         CopyToClipboardTask.TAG
                 ).
                 commit();
-	}
+    }
 
     protected boolean allowSelectedFileName()
     {
@@ -1095,12 +1095,12 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     protected void confirmDelete(boolean wipe)
-	{
-		Bundle b = new Bundle();
-		LocationsManager.storePathsInBundle(b, getRealLocation(), getSelectedPaths());
-		b.putBoolean(ARG_WIPE_FILES, wipe);
-		DeleteConfirmationDialog.showDialog(getFragmentManager(), b);
-	}
+    {
+        Bundle b = new Bundle();
+        LocationsManager.storePathsInBundle(b, getRealLocation(), getSelectedPaths());
+        b.putBoolean(ARG_WIPE_FILES, wipe);
+        DeleteConfirmationDialog.showDialog(getFragmentManager(), b);
+    }
 
     protected void onSelectionChanged()
     {
@@ -1382,7 +1382,7 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
     }
 
     private void selectAllFiles()
-	{
+    {
         ListView lv = getListView();
         BrowserRecord lr = null;
         for(int i=0;i<lv.getCount();i++)
@@ -1394,14 +1394,14 @@ public abstract class FileListViewFragmentBase extends RxFragment implements
                 lr = rec;
             }
         }
-		if(lr!=null)
+        if(lr!=null)
         {
             FileListViewAdapter adapter = (FileListViewAdapter) lv.getAdapter();
             adapter.notifyDataSetInvalidated();
             startSelectionMode();
             onSelectionChanged();
         }
-	}
+    }
 
     private boolean showSelectedFilenameEditText()
     {

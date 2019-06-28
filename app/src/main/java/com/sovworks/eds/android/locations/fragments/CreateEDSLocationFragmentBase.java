@@ -51,11 +51,11 @@ public abstract class CreateEDSLocationFragmentBase extends PropertiesFragmentBa
     }
 
     @Override
-	public void onCreateOptionsMenu (Menu menu, MenuInflater inflater)
-	{
-		inflater.inflate(R.menu.create_location_menu, menu);
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.create_location_menu, menu);
         menu.findItem(R.id.confirm).setTitle(R.string.create_new_container);
-	}
+    }
 
     @Override
     public void onPrepareOptionsMenu (Menu menu)
@@ -75,7 +75,7 @@ public abstract class CreateEDSLocationFragmentBase extends PropertiesFragmentBa
     }
 
     @Override
-	public boolean onOptionsItemSelected(MenuItem menuItem)
+    public boolean onOptionsItemSelected(MenuItem menuItem)
     {
         switch (menuItem.getItemId())
         {

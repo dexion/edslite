@@ -11,10 +11,10 @@ extern "C"
 #define LE32(x) (x)
 
 #ifndef u4byte
-#define u4byte	unsigned int
+#define u4byte  unsigned int
 #endif
 #ifndef u1byte
-#define u1byte	unsigned char
+#define u1byte  unsigned char
 #endif
 
 #ifndef extract_byte
@@ -29,15 +29,15 @@ extern "C"
 #endif
 typedef struct
 {
-	u4byte l_key[40];
-	u4byte s_key[4];
+    u4byte l_key[40];
+    u4byte s_key[4];
 #if !defined (TC_MINIMIZE_CODE_SIZE) || defined (TC_WINDOWS_BOOT_TWOFISH)
-	u4byte mk_tab[4 * 256];
+    u4byte mk_tab[4 * 256];
 #endif
-	u4byte k_len;
+    u4byte k_len;
 } TwofishInstance;
 
-#define TWOFISH_KS		sizeof(TwofishInstance)
+#define TWOFISH_KS      sizeof(TwofishInstance)
 
 u4byte * twofish_set_key(TwofishInstance *instance, const u4byte in_key[], const u4byte key_len);
 void twofish_encrypt(TwofishInstance *instance, const u4byte in_blk[4], u4byte out_blk[]);

@@ -7,7 +7,7 @@ import com.sovworks.eds.locations.LocationsManager;
 
 public class AddExistingContainerTaskFragment extends AddExistingContainerTaskFragmentBase
 {
-	public static AddExistingContainerTaskFragment newInstance(Uri containerLocationUri, boolean storeLink, String containerFormatName)
+    public static AddExistingContainerTaskFragment newInstance(Uri containerLocationUri, boolean storeLink, String containerFormatName)
     {
         Bundle args = new Bundle();
         args.putBoolean(ARG_STORE_LINK, storeLink);

@@ -141,9 +141,9 @@ public class FileListDataFragment extends RxFragment
 
 
     @Override
-	public void onActivityResult (int requestCode, int resultCode, Intent data)
-	{
-		if(requestCode == REQUEST_CODE_OPEN_LOCATION)
+    public void onActivityResult (int requestCode, int resultCode, Intent data)
+    {
+        if(requestCode == REQUEST_CODE_OPEN_LOCATION)
         {
             if(resultCode != Activity.RESULT_OK)
                 getActivity().setIntent(new Intent());
@@ -159,9 +159,9 @@ public class FileListDataFragment extends RxFragment
                     });
 
         }
-		else
-			super.onActivityResult(requestCode, resultCode, data);
-	}
+        else
+            super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onDetach ()
@@ -238,10 +238,10 @@ public class FileListDataFragment extends RxFragment
     {
         synchronized (_filesListSync)
         {
-        	if(_fileList!=null)
-	            for(BrowserRecord f: _fileList)
-		            if(path.equals(f.getPath()))
-		                return f;        
+            if(_fileList!=null)
+                for(BrowserRecord f: _fileList)
+                    if(path.equals(f.getPath()))
+                        return f;
         }
         return null;
     }
@@ -578,44 +578,44 @@ public class FileListDataFragment extends RxFragment
     }
 
     private void restoreNavigHistory(Bundle state)
-	{
+    {
         if (state.containsKey(STATE_NAVIG_HISTORY))
         {
             ArrayList<HistoryItem> l = state.getParcelableArrayList(STATE_NAVIG_HISTORY);
             if(l!=null)
                 _navigHistory.addAll(l);
         }
-	}
+    }
 
     public void loadLocation(final Bundle savedState, final boolean autoOpen)
-	{
-		final Uri uri = getLocationUri(getActivity().getIntent(), savedState);
+    {
+        final Uri uri = getLocationUri(getActivity().getIntent(), savedState);
         Location loc = null;
-		try
-		{
-			loc = initLocationFromUri(uri);
-		}
-		catch(Exception e)
-		{
-			Logger.showAndLog(getActivity(), e);
-		}
-		if(loc == null)
+        try
+        {
+            loc = initLocationFromUri(uri);
+        }
+        catch(Exception e)
+        {
+            Logger.showAndLog(getActivity(), e);
+        }
+        if(loc == null)
             loc = getFallbackLocation();
 
         if(autoOpen && !LocationsManager.isOpen(loc))
-		{
+        {
             Intent i = new Intent(getActivity(), OpenLocationsActivity.class);
             LocationsManager.storeLocationsInIntent(i, Collections.singletonList(loc));
             startActivityForResult(i, REQUEST_CODE_OPEN_LOCATION);
-		}
-		else if(savedState == null)
+        }
+        else if(savedState == null)
         {
             resetIntent();
             readLocation(loc, null);
         }
         else
             restoreState(savedState);
-	}
+    }
 
     private void resetIntent()
     {
@@ -653,20 +653,20 @@ public class FileListDataFragment extends RxFragment
     }
 
     private Location initLocationFromUri(Uri locationUri) throws Exception
-	{
-		return locationUri != null ?
-				_locationsManager.getLocation(locationUri)
-			:
-				null;
-	}
+    {
+        return locationUri != null ?
+                _locationsManager.getLocation(locationUri)
+            :
+                null;
+    }
 
-	private Location getFallbackLocation()
-	{
-		return FileManagerActivity.getStartLocation(getActivity());
-	}
+    private Location getFallbackLocation()
+    {
+        return FileManagerActivity.getStartLocation(getActivity());
+    }
 
     private Comparator<BrowserRecord> initSorter()
-	{
+    {
         return getComparator(UserSettings.getSettings(getActivity()));
-	}
+    }
 }

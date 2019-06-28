@@ -130,4 +130,4 @@
                        android:resource="@xml/close_all_containers_widget_info"/>
         </receiver>
     </application>
-</manifest> 
+</manifest>

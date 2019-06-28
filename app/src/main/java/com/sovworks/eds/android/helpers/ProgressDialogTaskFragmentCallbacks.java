@@ -37,53 +37,53 @@ public class ProgressDialogTaskFragmentCallbacks implements TaskCallbacks
         }
     }
 
-	public ProgressDialogTaskFragmentCallbacks(Activity context, int dialogTextResId)
-	{
-		_context = context;
-		_dialogTextResId = dialogTextResId;
-	}
+    public ProgressDialogTaskFragmentCallbacks(Activity context, int dialogTextResId)
+    {
+        _context = context;
+        _dialogTextResId = dialogTextResId;
+    }
 
-	@Override
-	public void onPrepare(Bundle args)
-	{
-		
-	}
-	
-	@Override
-	public void onResumeUI(Bundle args)
-	{
-		_dialog = initDialog(args);
-		if(_dialog!=null)		
-			_dialog.show(_context.getFragmentManager(), Dialog.TAG);
-	}
-	
-	@Override
-	public void onSuspendUI(Bundle args)
-	{
-		if(_dialog!=null)
+    @Override
+    public void onPrepare(Bundle args)
+    {
+
+    }
+
+    @Override
+    public void onResumeUI(Bundle args)
+    {
+        _dialog = initDialog(args);
+        if(_dialog!=null)
+            _dialog.show(_context.getFragmentManager(), Dialog.TAG);
+    }
+
+    @Override
+    public void onSuspendUI(Bundle args)
+    {
+        if(_dialog!=null)
             _dialog.dismissAllowingStateLoss();
-	}
+    }
 
-	@Override
-	public void onUpdateUI(Object state)
-	{		
+    @Override
+    public void onUpdateUI(Object state)
+    {
 
-	}
+    }
 
-	@Override
-	public void onCompleted(Bundle args, Result result)
-	{
-		
-	}
-	
-	protected final Activity _context;
-	
-	protected DialogFragment initDialog(Bundle args)
-	{
+    @Override
+    public void onCompleted(Bundle args, Result result)
+    {
+
+    }
+
+    protected final Activity _context;
+
+    protected DialogFragment initDialog(Bundle args)
+    {
         return Dialog.newInstance(_context.getText(_dialogTextResId).toString());
-	}
+    }
 
-	private DialogFragment _dialog;
-	private final int _dialogTextResId;
-	
+    private DialogFragment _dialog;
+    private final int _dialogTextResId;
+
 }

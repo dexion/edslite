@@ -170,10 +170,10 @@ public class LocationShortcutWidgetConfigActivity extends LocationShortcutWidget
                     AppWidgetManager.INVALID_APPWIDGET_ID);
         }
     }
-	
-	@Override
+
+    @Override
     public void onCreate(Bundle icicle)
-	{
+    {
         super.onCreate(icicle);
         setResult(RESULT_CANCELED);
     }

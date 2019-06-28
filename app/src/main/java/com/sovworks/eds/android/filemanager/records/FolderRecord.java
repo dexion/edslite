@@ -15,10 +15,10 @@ import java.io.IOException;
 public class FolderRecord extends FsBrowserRecord
 {
 
-	public FolderRecord(Context context) throws IOException
-	{			
-		super(context);
-	}
+    public FolderRecord(Context context) throws IOException
+    {
+        super(context);
+    }
 
     @Override
     public int getViewType()
@@ -41,17 +41,17 @@ public class FolderRecord extends FsBrowserRecord
 
     @Override
     public boolean allowSelect()
-	{
-		return _host.allowFolderSelect();
-	}
+    {
+        return _host.allowFolderSelect();
+    }
 
-	@Override
-	public boolean open() throws Exception
-	{
-		if(_path!=null)
-			_host.goTo(_path);
-		return true;
-	}
+    @Override
+    public boolean open() throws Exception
+    {
+        if(_path!=null)
+            _host.goTo(_path);
+        return true;
+    }
 
     @Override
     public boolean openInplace() throws Exception
@@ -60,11 +60,11 @@ public class FolderRecord extends FsBrowserRecord
         return open();
     }
 
-	@Override
-	protected Drawable getDefaultIcon()
-	{
-		return getFolderIcon(_host);
-	}
+    @Override
+    protected Drawable getDefaultIcon()
+    {
+        return getFolderIcon(_host);
+    }
 
 
     private static Drawable _folderIcon;
@@ -80,5 +80,5 @@ public class FolderRecord extends FsBrowserRecord
         }
         return _folderIcon;
     }
-	
+
 }

@@ -14,13 +14,13 @@ import java.io.IOException;
 public interface BrowserRecord extends CachedPathInfo
 {
     void init(Location location, Path path) throws IOException;
-	String getName();
-	boolean open() throws Exception;
+    String getName();
+    boolean open() throws Exception;
     boolean openInplace() throws Exception;
     boolean allowSelect();
     boolean isSelected();
     void setSelected(boolean val);
-	void setHostActivity(FileManagerActivity host);
+    void setHostActivity(FileManagerActivity host);
     int getViewType();
     View createView(int position, ViewGroup parent);
     void updateView(View view, int position);

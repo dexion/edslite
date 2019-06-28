@@ -22,12 +22,12 @@ public abstract class ConfirmationDialog extends DialogFragment
         void onNo();
     }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
         Util.setDialogStyle(this);
-	}
+    }
 
     @NonNull
     @Override

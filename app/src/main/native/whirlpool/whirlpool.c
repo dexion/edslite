@@ -14,7 +14,7 @@
  *      ``The Whirlpool hashing function,''
  *      NESSIE submission, 2000 (tweaked version, 2001),
  *      <https://www.cosic.esat.kuleuven.ac.be/nessie/workshop/submissions/whirlpool.zip>
- * 
+ *
  * @author  Paulo S.L.M. Barreto
  * @author  Vincent Rijmen.
  * Adapted for TrueCrypt.
@@ -994,7 +994,7 @@ void WHIRLPOOL_add(const unsigned char * const source,
 
 /**
  * Get the hash value from the hashing state.
- * 
+ *
  * This method uses the invariant: bufferBits < DIGESTBITS
  */
 void WHIRLPOOL_finalize(struct NESSIEstruct * const structpointer,

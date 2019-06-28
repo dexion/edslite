@@ -17,37 +17,37 @@ import com.sovworks.eds.android.R;
 
 public class SortDialog extends DialogFragment
 {
-	
-	public interface SortingReceiver
-	{
-		void applySort(int sortMode);
-	}	
-	
-	public static void showDialog(FragmentManager fm,int sortMode, String receiverFragmentTag)
-	{
-		showDialog(fm, sortMode, R.array.sort_mode, receiverFragmentTag);
-	}
 
-	public static void showDialog(FragmentManager fm,int sortMode,int sortLabelsResId, String receiverFragmentTag)
-	{
-		DialogFragment newFragment = new SortDialog();		
-		Bundle b = new Bundle();		
-		b.putInt(ARG_SORT_MODE, sortMode);
-		b.putInt(ARG_SORT_LABELS_RES_ID, sortLabelsResId);
+    public interface SortingReceiver
+    {
+        void applySort(int sortMode);
+    }
+
+    public static void showDialog(FragmentManager fm,int sortMode, String receiverFragmentTag)
+    {
+        showDialog(fm, sortMode, R.array.sort_mode, receiverFragmentTag);
+    }
+
+    public static void showDialog(FragmentManager fm,int sortMode,int sortLabelsResId, String receiverFragmentTag)
+    {
+        DialogFragment newFragment = new SortDialog();
+        Bundle b = new Bundle();
+        b.putInt(ARG_SORT_MODE, sortMode);
+        b.putInt(ARG_SORT_LABELS_RES_ID, sortLabelsResId);
         if(receiverFragmentTag!=null)
             b.putString(ARG_RECEIVER_FRAGMENT_TAG, receiverFragmentTag);
-		newFragment.setArguments(b);
-	    newFragment.show(fm, "SortDialog");
-	}	
-	
-	@NonNull
+        newFragment.setArguments(b);
+        newFragment.show(fm, "SortDialog");
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
-	{			
-		@SuppressLint("InflateParams") View v = getActivity().getLayoutInflater().inflate(R.layout.sort_dialog, null);
-		final ListView listView = v.findViewById(android.R.id.list);
+    {
+        @SuppressLint("InflateParams") View v = getActivity().getLayoutInflater().inflate(R.layout.sort_dialog, null);
+        final ListView listView = v.findViewById(android.R.id.list);
         final RadioGroup sortDirection = v.findViewById(R.id.sort_group);
-		listView.setAdapter(
+        listView.setAdapter(
             new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_list_item_single_choice,
@@ -56,9 +56,9 @@ public class SortDialog extends DialogFragment
                 )
             )
         );
-		int sortMode = getArguments().getInt(ARG_SORT_MODE);
-		listView.setItemChecked(sortMode/2, true);
-		boolean asc = sortMode % 2 == 0;
+        int sortMode = getArguments().getInt(ARG_SORT_MODE);
+        listView.setItemChecked(sortMode/2, true);
+        boolean asc = sortMode % 2 == 0;
         sortDirection.check(asc ? R.id.sort_asc : R.id.sort_desc);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -86,12 +86,12 @@ public class SortDialog extends DialogFragment
                             }
                         }
                 );
-		return alert.create();
-	}	
-	
-	
-	protected void applySort(int listPos,boolean isAscending)
-	{
+        return alert.create();
+    }
+
+
+    protected void applySort(int listPos,boolean isAscending)
+    {
         int sortMode = listPos*2 + (isAscending ? 0 : 1);
         String rft = getArguments().getString(ARG_RECEIVER_FRAGMENT_TAG);
         if(rft!=null)
@@ -101,11 +101,11 @@ public class SortDialog extends DialogFragment
                 sr.applySort(sortMode);
         }
         else if(getActivity() instanceof SortingReceiver)
-			((SortingReceiver)getActivity()).applySort(sortMode);
-	}
-	
-	private static final String ARG_SORT_MODE = "com.sovworks.eds.android.SORT_MODE";
-	private static final String ARG_SORT_LABELS_RES_ID = "com.sovworks.eds.android.SORT_LABELS_RES_ID";
+            ((SortingReceiver)getActivity()).applySort(sortMode);
+    }
+
+    private static final String ARG_SORT_MODE = "com.sovworks.eds.android.SORT_MODE";
+    private static final String ARG_SORT_LABELS_RES_ID = "com.sovworks.eds.android.SORT_LABELS_RES_ID";
     private static final String ARG_RECEIVER_FRAGMENT_TAG = "com.sovworks.eds.android.RECEIVER_FRAGMENT_TAG";
 
 }

@@ -10,11 +10,11 @@
         android:src="?attr/collapseIcon"
         style="@style/DrawerMainIcon" />
     <TextView
-		android:id="@android:id/text1"
+        android:id="@android:id/text1"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@android:id/icon"
         android:layout_toStartOf="@android:id/icon"
-		style="@style/DrawerMainTitle" />
+        style="@style/DrawerMainTitle" />
 </RelativeLayout>

@@ -209,31 +209,31 @@ public abstract class DrawerControllerBase
     }
 
     protected class DrawerAdapter extends ArrayAdapter<DrawerMenuItemBase>
-	{
+    {
 
-		DrawerAdapter(List<DrawerMenuItemBase> itemsList)
-		{
-			super(_activity, R.layout.drawer_folder, itemsList);
-		}
+        DrawerAdapter(List<DrawerMenuItemBase> itemsList)
+        {
+            super(_activity, R.layout.drawer_folder, itemsList);
+        }
 
-		@Override
-	    public int getItemViewType(int position)
-	    {
-	    	 DrawerMenuItemBase rec = getItem(position);
-			 return rec==null ? 0 : rec.getViewType();
-	    }
-
-	    @Override
-        public int getViewTypeCount()
-	     {
-	         return 4;
-	     }
-
-		@NonNull
         @Override
-	    public View getView(int position, View convertView, @NonNull ViewGroup parent)
-		{
-			final DrawerMenuItemBase rec = getItem(position);
+        public int getItemViewType(int position)
+        {
+             DrawerMenuItemBase rec = getItem(position);
+             return rec==null ? 0 : rec.getViewType();
+        }
+
+        @Override
+        public int getViewTypeCount()
+         {
+             return 4;
+         }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent)
+        {
+            final DrawerMenuItemBase rec = getItem(position);
             View v;
             if (convertView != null)
             {
@@ -242,10 +242,10 @@ public abstract class DrawerControllerBase
             } else
                 v = rec.createView(position, parent);
             v.setTag(rec);
-	        return v;
-	    }
+            return v;
+        }
 
-	}
+    }
     private final FileManagerActivity _activity;
     private ListView _drawerListView;
     private DrawerLayout _drawerLayout;

@@ -81,15 +81,15 @@ class FileRecord extends FsBrowserRecord
         private final List<BrowserRecord> _records = new ArrayList<>();
     }
 
-	public FileRecord(Context context)
-	{
-		super(context);
+    public FileRecord(Context context)
+    {
+        super(context);
         _loadPreviews = _needLoadExtInfo = UserSettings.getSettings(context).showPreviews();
         DisplayMetrics dm = _context.getResources().getDisplayMetrics();
         _iconWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GlobalConfig.FB_PREVIEW_WIDTH, dm);
         _iconHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, GlobalConfig.FB_PREVIEW_HEIGHT, dm);
 
-	}
+    }
 
     @Override
     public void init(Path path) throws IOException
@@ -100,9 +100,9 @@ class FileRecord extends FsBrowserRecord
 
     @Override
     public boolean allowSelect()
-	{
+    {
         return _host.allowFileSelect();
-	}
+    }
 
     @Override
     public void updateView(View view, final int position)
@@ -129,10 +129,10 @@ class FileRecord extends FsBrowserRecord
             }
         }
         //DisplayMetrics dm = _mainActivity.getResources().getDisplayMetrics();
-		//_iconWidth = iv.getMeasuredWidth();
+        //_iconWidth = iv.getMeasuredWidth();
         //if(_iconWidth == 0)
         //    _iconWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, Preferences.FB_PREVIEW_WIDTH, dm);
-	    //_iconHeight = iv.getMeasuredHeight();
+        //_iconHeight = iv.getMeasuredHeight();
         //if(_iconHeight == 0)
         //    _iconHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, Preferences.FB_PREVIEW_HEIGHT, dm);
     }
@@ -153,11 +153,11 @@ class FileRecord extends FsBrowserRecord
 
     protected boolean _needLoadExtInfo;
 
-	@Override
-	protected Drawable getDefaultIcon()
-	{
-		return getFileIcon(_host);
-	}
+    @Override
+    protected Drawable getDefaultIcon()
+    {
+        return getFileIcon(_host);
+    }
 
     protected void updateFileInfoString()
     {
@@ -177,12 +177,12 @@ class FileRecord extends FsBrowserRecord
     }
 
     protected String formatInfoString(Context context) throws IOException
-	{
+    {
         StringBuilder sb = new StringBuilder();
         appendSizeInfo(context, sb);
         appendModDataInfo(context, sb);
         return sb.toString();
-	}
+    }
 
     protected void appendSizeInfo(Context context, StringBuilder sb)
     {
@@ -276,7 +276,7 @@ class FileRecord extends FsBrowserRecord
         {
             //bug?
             //java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.net.Uri.getHost()' on a null object reference
-	        //at android.os.Parcel.readException(Parcel.java:1552)
+            //at android.os.Parcel.readException(Parcel.java:1552)
         }
         return null;
     }

@@ -157,7 +157,7 @@
         <item name="android:src">@drawable/ic_menu_more</item>
     </style>
     <style name="ActionBarTitleTextStyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title.Inverse">
-        <item name="android:textSize">14sp</item>        
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="ActionBarTitleTextStyle.Dark" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textSize">14sp</item>

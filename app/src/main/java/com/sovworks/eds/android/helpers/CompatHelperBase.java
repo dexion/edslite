@@ -20,29 +20,29 @@ import java.io.InputStream;
 @SuppressLint("NewApi")
 public class CompatHelperBase
 {
-	public static void setWindowFlagSecure(Activity act)
-	{
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-		    act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-	}
+    public static void setWindowFlagSecure(Activity act)
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            act.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+    }
 
-	public static void restartActivity(Activity activity)
-	{
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-		    activity.recreate();
-		else
-		{
-		    Intent intent = activity.getIntent();
-		    activity.overridePendingTransition(0, 0);
-		    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-		    activity.finish();
-		    activity.overridePendingTransition(0, 0);
-		    activity.startActivity(intent);
-		}
-	}
+    public static void restartActivity(Activity activity)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            activity.recreate();
+        else
+        {
+            Intent intent = activity.getIntent();
+            activity.overridePendingTransition(0, 0);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            activity.finish();
+            activity.overridePendingTransition(0, 0);
+            activity.startActivity(intent);
+        }
+    }
 
-	public static void storeTextInClipboard(Context context,String text)
-	{
+    public static void storeTextInClipboard(Context context,String text)
+    {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
         {
             @SuppressWarnings("deprecation") android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -54,34 +54,34 @@ public class CompatHelperBase
             ClipData clip = ClipData.newPlainText("Text", text);
             clipboard.setPrimaryClip(clip);
         }
-	}
+    }
 
-	public static Bitmap loadBitmapRegion(Path path,int sampleSize,Rect regionRect) throws IOException
-	{
-		BitmapFactory.Options options = new BitmapFactory.Options();
-	    options.inSampleSize = sampleSize;
-	    InputStream data = path.getFile().getInputStream();
-		try
-		{
-			if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.GINGERBREAD_MR1)
-			{
-				BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(data, true);
-				try
-				{
-					return decoder.decodeRegion(regionRect, options);
-				}
-				finally
-				{
-					decoder.recycle();
-				}
-			}
-			else
-				return BitmapFactory.decodeStream(data, null, options);
-		}
-		finally
-		{
-			data.close();
-		}
-	}
-		
+    public static Bitmap loadBitmapRegion(Path path,int sampleSize,Rect regionRect) throws IOException
+    {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = sampleSize;
+        InputStream data = path.getFile().getInputStream();
+        try
+        {
+            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.GINGERBREAD_MR1)
+            {
+                BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(data, true);
+                try
+                {
+                    return decoder.decodeRegion(regionRect, options);
+                }
+                finally
+                {
+                    decoder.recycle();
+                }
+            }
+            else
+                return BitmapFactory.decodeStream(data, null, options);
+        }
+        finally
+        {
+            data.close();
+        }
+    }
+
 }

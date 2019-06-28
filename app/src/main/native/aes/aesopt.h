@@ -316,7 +316,7 @@
 
 /*  9. MASKING OR CASTING FROM LONGER VALUES TO BYTES
 
-    In some systems it is better to mask longer values to extract bytes 
+    In some systems it is better to mask longer values to extract bytes
     rather than using a cast. This option allows this choice.
 */
 #if 0

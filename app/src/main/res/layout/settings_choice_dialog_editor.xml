@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:descendantFocusability="blocksDescendants"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:descendantFocusability="blocksDescendants"
     style="@style/PropertyRow">
     <LinearLayout
         android:id="@+id/title_layout"
@@ -16,16 +16,16 @@
             <Button
                 android:id="@android:id/button1"
                 android:text="@string/change"
-				style="?attr/propertyButtonStyle"/>
+                style="?attr/propertyButtonStyle"/>
     </LinearLayout>
-	<TextView
-		android:id="@+id/desc"
-		style="@style/PropertyDesc"
-		android:layout_below="@id/title_layout"/>
-	<TextView
-		android:id="@android:id/text1"
-		android:layout_below="@id/desc"
-		android:layout_marginTop="4dp"
-		android:textStyle="bold"
-		style="@style/PropertyDesc" />
+    <TextView
+        android:id="@+id/desc"
+        style="@style/PropertyDesc"
+        android:layout_below="@id/title_layout"/>
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_below="@id/desc"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold"
+        style="@style/PropertyDesc" />
 </RelativeLayout>

@@ -14,42 +14,42 @@ import com.sovworks.eds.locations.Location;
 
 public class RenameFileTask extends TaskFragment
 {
-	public static final String TAG = "RenameFileTask";
+    public static final String TAG = "RenameFileTask";
 
-	public static final String ARG_NEW_NAME = "com.sovworks.eds.android.NEW_NAME";
+    public static final String ARG_NEW_NAME = "com.sovworks.eds.android.NEW_NAME";
 
-	public static RenameFileTask newInstance(Location target, String newName)
-	{
-		Bundle args = new Bundle();
-		args.putString(ARG_NEW_NAME, newName);
-		LocationsManager.storePathsInBundle(args, target, null);
-		RenameFileTask f = new RenameFileTask();
-		f.setArguments(args);
-		return f;			
-	}
-	
-	@Override
-	public void initTask(Activity activity)
-	{
-		_context = activity.getApplicationContext();
-	}
-	
-	@Override
-	protected void doWork(TaskState state) throws Exception
-	{
-		String newName = getArguments().getString(ARG_NEW_NAME);
-		Location target = LocationsManager.getLocationsManager(_context).getFromBundle(getArguments(), null);
-		Path path = target.getCurrentPath();
-		if(path.isFile())
-			path.getFile().rename(newName);
-		else if(path.isDirectory())
-			path.getDirectory().rename(newName);
-	}
-	
-	@Override
-	protected TaskCallbacks getTaskCallbacks(final Activity activity)
-	{
-		return new TaskCallbacks()
+    public static RenameFileTask newInstance(Location target, String newName)
+    {
+        Bundle args = new Bundle();
+        args.putString(ARG_NEW_NAME, newName);
+        LocationsManager.storePathsInBundle(args, target, null);
+        RenameFileTask f = new RenameFileTask();
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void initTask(Activity activity)
+    {
+        _context = activity.getApplicationContext();
+    }
+
+    @Override
+    protected void doWork(TaskState state) throws Exception
+    {
+        String newName = getArguments().getString(ARG_NEW_NAME);
+        Location target = LocationsManager.getLocationsManager(_context).getFromBundle(getArguments(), null);
+        Path path = target.getCurrentPath();
+        if(path.isFile())
+            path.getFile().rename(newName);
+        else if(path.isDirectory())
+            path.getDirectory().rename(newName);
+    }
+
+    @Override
+    protected TaskCallbacks getTaskCallbacks(final Activity activity)
+    {
+        return new TaskCallbacks()
         {
             @Override
             public void onUpdateUI(Object state)
@@ -76,7 +76,7 @@ public class RenameFileTask extends TaskFragment
                 try
                 {
                     result.getResult();
-					activity.sendBroadcast(new Intent(FileOpsService.BROADCAST_FILE_OPERATION_COMPLETED));
+                    activity.sendBroadcast(new Intent(FileOpsService.BROADCAST_FILE_OPERATION_COMPLETED));
                 }
                 catch(Throwable e)
                 {
@@ -84,7 +84,7 @@ public class RenameFileTask extends TaskFragment
                 }
             }
         };
-	}
-	
-	private Context _context;
+    }
+
+    private Context _context;
 }

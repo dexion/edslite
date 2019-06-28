@@ -30,140 +30,140 @@ import java.util.TreeSet;
 
 @SuppressLint({"CommitPrefEdits", "ApplySharedPref", "InlinedApi"})
 public class ImageViewerActivity extends Activity implements PreviewFragment.Host
-{	
-	public static final String INTENT_PARAM_CURRENT_PATH = "current_path";
-	
-	public static class RestorePathsTask extends TaskFragment
-	{
-		public static final String TAG = "RestorePathsTask";
-		
-		public static RestorePathsTask newInstance()
-		{
-			return new RestorePathsTask();
-		}
+{
+    public static final String INTENT_PARAM_CURRENT_PATH = "current_path";
 
-		protected void initTask(Activity activity)
-		{
-			_loc = ((ImageViewerActivity)activity).getLocation();
-			_pathStrings = activity.getIntent().getStringArrayListExtra(LocationsManager.PARAM_PATHS);
-			_settings = UserSettings.getSettings(activity);
-		}
+    public static class RestorePathsTask extends TaskFragment
+    {
+        public static final String TAG = "RestorePathsTask";
 
-		@Override
-		protected void doWork(TaskState state) throws Exception
-		{			
-			ArrayList<Path> paths = Util.restorePaths(_loc.getFS(), _pathStrings);
-			@SuppressWarnings("unchecked") TreeSet<CachedPathInfo> res = new TreeSet(FileListDataFragment.getComparator(_settings));
-			for(Path p: paths)
-			{
-				CachedPathInfoBase cpi = new CachedPathInfoBase();
-				cpi.init(p);
-				res.add(cpi);
-			}
-			state.setResult(res);
-		}		
-		
-		@Override
-		protected TaskCallbacks getTaskCallbacks(Activity activity)
-		{
-			return ((ImageViewerActivity) activity).getRestorePathsTaskCallbacks();
-		}
-		private Location _loc;
-		private ArrayList<String> _pathStrings;
-		private Settings _settings;
-	}
+        public static RestorePathsTask newInstance()
+        {
+            return new RestorePathsTask();
+        }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
-		com.sovworks.eds.android.helpers.Util.setTheme(this);
-		super.onCreate(savedInstanceState);
-		UserSettings us = UserSettings.getSettings(this);
-		if(us.isFlagSecureEnabled())
-			CompatHelper.setWindowFlagSecure(this);
-		if(us.isImageViewerFullScreenModeEnabled())
-			enableFullScreen();
-		_location = LocationsManager.getLocationsManager(this).getFromIntent(getIntent(), null);
-		getFragmentManager().beginTransaction().add(RestorePathsTask.newInstance(), RestorePathsTask.TAG).commit();
-	}
+        protected void initTask(Activity activity)
+        {
+            _loc = ((ImageViewerActivity)activity).getLocation();
+            _pathStrings = activity.getIntent().getStringArrayListExtra(LocationsManager.PARAM_PATHS);
+            _settings = UserSettings.getSettings(activity);
+        }
 
-	@Override
-	public NavigableSet<? extends CachedPathInfo> getCurrentFiles()
-	{
-		return _files;
-	}
+        @Override
+        protected void doWork(TaskState state) throws Exception
+        {
+            ArrayList<Path> paths = Util.restorePaths(_loc.getFS(), _pathStrings);
+            @SuppressWarnings("unchecked") TreeSet<CachedPathInfo> res = new TreeSet(FileListDataFragment.getComparator(_settings));
+            for(Path p: paths)
+            {
+                CachedPathInfoBase cpi = new CachedPathInfoBase();
+                cpi.init(p);
+                res.add(cpi);
+            }
+            state.setResult(res);
+        }
 
-	@Override
-	public Location getLocation()
-	{
-		return _location;
-	}
+        @Override
+        protected TaskCallbacks getTaskCallbacks(Activity activity)
+        {
+            return ((ImageViewerActivity) activity).getRestorePathsTaskCallbacks();
+        }
+        private Location _loc;
+        private ArrayList<String> _pathStrings;
+        private Settings _settings;
+    }
 
-	@Override
-	public Object getFilesListSync()
-	{
-		return new Object();
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        com.sovworks.eds.android.helpers.Util.setTheme(this);
+        super.onCreate(savedInstanceState);
+        UserSettings us = UserSettings.getSettings(this);
+        if(us.isFlagSecureEnabled())
+            CompatHelper.setWindowFlagSecure(this);
+        if(us.isImageViewerFullScreenModeEnabled())
+            enableFullScreen();
+        _location = LocationsManager.getLocationsManager(this).getFromIntent(getIntent(), null);
+        getFragmentManager().beginTransaction().add(RestorePathsTask.newInstance(), RestorePathsTask.TAG).commit();
+    }
 
-	@Override
-	public void onToggleFullScreen()
-	{
-		if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-			CompatHelper.restartActivity(this);
-	}
+    @Override
+    public NavigableSet<? extends CachedPathInfo> getCurrentFiles()
+    {
+        return _files;
+    }
 
-	public TaskFragment.TaskCallbacks getRestorePathsTaskCallbacks()
-	{
-		return new ProgressDialogTaskFragmentCallbacks(this,R.string.loading)
-		{
-			@SuppressWarnings("unchecked")
-			@Override
-			public void onCompleted(Bundle args, Result result)
-			{
-				super.onCompleted(args, result);
-				try			
-				{
-					_files = (TreeSet<CachedPathInfo>) result.getResult();
-				}
-				catch(Throwable e)
-				{
-					Logger.showAndLog(_context, result.getError());
-				}
-				if(getPreviewFragment()==null)
-					showFragment(getIntent().getStringExtra(INTENT_PARAM_CURRENT_PATH));
-			}
-		};
-	}
+    @Override
+    public Location getLocation()
+    {
+        return _location;
+    }
 
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		PreviewFragment pf = (PreviewFragment) getFragmentManager().findFragmentByTag(PreviewFragment.TAG);
-		if(pf!=null)
-			pf.updateImageViewFullScreen();
-	}
+    @Override
+    public Object getFilesListSync()
+    {
+        return new Object();
+    }
 
-	private TreeSet<CachedPathInfo> _files;
-	private Location _location;
+    @Override
+    public void onToggleFullScreen()
+    {
+        if(android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+            CompatHelper.restartActivity(this);
+    }
 
-	private PreviewFragment getPreviewFragment()
-	{
-		return (PreviewFragment) getFragmentManager().findFragmentByTag(PreviewFragment.TAG);
-	}
+    public TaskFragment.TaskCallbacks getRestorePathsTaskCallbacks()
+    {
+        return new ProgressDialogTaskFragmentCallbacks(this,R.string.loading)
+        {
+            @SuppressWarnings("unchecked")
+            @Override
+            public void onCompleted(Bundle args, Result result)
+            {
+                super.onCompleted(args, result);
+                try
+                {
+                    _files = (TreeSet<CachedPathInfo>) result.getResult();
+                }
+                catch(Throwable e)
+                {
+                    Logger.showAndLog(_context, result.getError());
+                }
+                if(getPreviewFragment()==null)
+                    showFragment(getIntent().getStringExtra(INTENT_PARAM_CURRENT_PATH));
+            }
+        };
+    }
 
-	private void showFragment(String currentImagePathString)
-	{
-		PreviewFragment f = PreviewFragment.newInstance(currentImagePathString);
-		getFragmentManager().beginTransaction().add(android.R.id.content, f, PreviewFragment.TAG).commit();
-	}	
-	
-	private void enableFullScreen()
-	{		
-		if(android.os.Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT)
-		{
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		}
-		invalidateOptionsMenu();
-	}
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        PreviewFragment pf = (PreviewFragment) getFragmentManager().findFragmentByTag(PreviewFragment.TAG);
+        if(pf!=null)
+            pf.updateImageViewFullScreen();
+    }
+
+    private TreeSet<CachedPathInfo> _files;
+    private Location _location;
+
+    private PreviewFragment getPreviewFragment()
+    {
+        return (PreviewFragment) getFragmentManager().findFragmentByTag(PreviewFragment.TAG);
+    }
+
+    private void showFragment(String currentImagePathString)
+    {
+        PreviewFragment f = PreviewFragment.newInstance(currentImagePathString);
+        getFragmentManager().beginTransaction().add(android.R.id.content, f, PreviewFragment.TAG).commit();
+    }
+
+    private void enableFullScreen()
+    {
+        if(android.os.Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT)
+        {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+        invalidateOptionsMenu();
+    }
 }

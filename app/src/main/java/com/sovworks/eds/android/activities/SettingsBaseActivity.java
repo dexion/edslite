@@ -13,7 +13,7 @@ public abstract class SettingsBaseActivity extends Activity
     public static final String SETTINGS_FRAGMENT_TAG = "com.sovworks.eds.android.locations.SETTINGS_FRAGMENT";
 
     @Override
-	public void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         Util.setTheme(this);
         super.onCreate(savedInstanceState);

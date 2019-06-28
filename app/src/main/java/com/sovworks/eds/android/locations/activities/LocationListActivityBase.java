@@ -18,7 +18,7 @@ public abstract class LocationListActivityBase extends Activity
     public static final String EXTRA_LOCATION_TYPE = "com.sovworks.eds.android.LOCATION_TYPE";
 
     @Override
-	public void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         Util.setTheme(this);
         super.onCreate(savedInstanceState);

@@ -30,9 +30,9 @@ public class ForceCloseDialog extends ConfirmationDialog
         f.show(fm, TAG);
     }
 
-	@Override
-	protected void onYes()
-	{
+    @Override
+    protected void onYes()
+    {
         Bundle closerArgs = getArguments().getBundle(ARG_CLOSER_ARGS);
         if(closerArgs == null)
             closerArgs = new Bundle();
@@ -43,7 +43,7 @@ public class ForceCloseDialog extends ConfirmationDialog
                 closerArgs
         );
         getFragmentManager().beginTransaction().add(closer, getArguments().getString(LocationCloserBaseFragment.PARAM_RECEIVER_FRAGMENT_TAG)).commit();
-	}
+    }
 
     @Override
     protected String getTitle()

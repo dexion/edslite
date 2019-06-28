@@ -7,24 +7,24 @@ find_library( log-lib
               log )
 
 add_library( edsxts
-			 SHARED
+       SHARED
              src/main/native/xts/edsxts.c )
 
-target_link_libraries( edsxts                       
+target_link_libraries( edsxts
                        ${log-lib} )
 
 add_library( edsaes
-			 SHARED
-             src/main/native/aes/edsaes.c 
-             src/main/native/aes/aescrypt.c 
-             src/main/native/aes/aeskey.c 
+       SHARED
+             src/main/native/aes/edsaes.c
+             src/main/native/aes/aescrypt.c
+             src/main/native/aes/aeskey.c
              src/main/native/aes/aestab.c )
 
 target_link_libraries( edsaes
                        ${log-lib} )
 
 add_library( edsserpent
-			 SHARED
+       SHARED
              src/main/native/serpent/edsserpent.c
              src/main/native/serpent/serpent.c )
 
@@ -32,19 +32,19 @@ target_link_libraries( edsserpent
                        ${log-lib} )
 
 add_library( edstwofish
-			 SHARED
+       SHARED
              src/main/native/twofish/edstwofish.c
              src/main/native/twofish/twofish.c )
 
 add_library( edsripemd160
-			 SHARED
+       SHARED
              src/main/native/ripemd160/edsripemd160.c )
 
 target_link_libraries( edsripemd160
                        ${log-lib} )
 
 add_library( edswhirlpool
-			 SHARED
+       SHARED
              src/main/native/whirlpool/edswhirlpool.c
              src/main/native/whirlpool/whirlpool.c )
 
@@ -52,21 +52,21 @@ target_link_libraries( edswhirlpool
                        ${log-lib} )
 
 add_library( fdraio
-			 SHARED
+       SHARED
              src/main/native/fdraio/fdraio.c )
 
 target_compile_definitions( fdraio
-        					PRIVATE _FILE_OFFSET_BITS=64 )
+                  PRIVATE _FILE_OFFSET_BITS=64 )
 
 target_link_libraries( fdraio
                        ${log-lib} )
 
 add_library( localxts
-			 SHARED
+       SHARED
              src/main/native/localxts/localxts.c )
 
 target_compile_definitions( localxts
-        					PRIVATE _FILE_OFFSET_BITS=64 )
+                  PRIVATE _FILE_OFFSET_BITS=64 )
 
 target_link_libraries( localxts
                        edsxts

@@ -5,10 +5,10 @@ import com.sovworks.eds.android.BuildConfig;
 
 class GlobalConfigCommon
 {
-	public static boolean isDebug()
-	{
-		return BuildConfig.DEBUG;
-	}
+    public static boolean isDebug()
+    {
+        return BuildConfig.DEBUG;
+    }
 
     public static final int FB_PREVIEW_WIDTH = 40;
     public static final int FB_PREVIEW_HEIGHT = 40;

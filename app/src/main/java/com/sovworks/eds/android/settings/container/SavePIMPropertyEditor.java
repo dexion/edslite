@@ -18,11 +18,11 @@ public class SavePIMPropertyEditor extends SwitchPropertyEditor implements TextE
         super(settingsFragment, R.string.remember_kdf_iterations_multiplier, 0);
     }
 
-	@Override
-	public EDSLocationSettingsFragment getHost()
-	{
-		return (EDSLocationSettingsFragment) super.getHost();
-	}
+    @Override
+    public EDSLocationSettingsFragment getHost()
+    {
+        return (EDSLocationSettingsFragment) super.getHost();
+    }
 
     @Override
     protected boolean loadValue()
@@ -55,13 +55,13 @@ public class SavePIMPropertyEditor extends SwitchPropertyEditor implements TextE
         if (isChecked)
         {
             startChangeValueDialog();
-			return true;
+            return true;
         }
         else
         {
             getHost().getLocation().getExternalSettings().setCustomKDFIterations(-1);
             getHost().saveExternalSettings();
-			return true;
+            return true;
         }
     }
 

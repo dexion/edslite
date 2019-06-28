@@ -28,7 +28,7 @@ typedef uint32_t u32;
 
 typedef struct
 {
-    block_cipher_interface *cipher;    
+    block_cipher_interface *cipher;
     void *next;
     void *prev;
 } cipher_node;

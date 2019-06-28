@@ -134,41 +134,41 @@ static void ctr_decrypt_buffer(const block_cipher_interface *cipher, uint8_t *bu
 
 static void free_cipher_list(cipher_node *ciphers_head)
 {
-	if(ciphers_head!=NULL)
-	{
-		if(ciphers_head->next!=NULL)
-			free_cipher_list((cipher_node *)ciphers_head->next);
-		free(ciphers_head);
-	}
+    if(ciphers_head!=NULL)
+    {
+        if(ciphers_head->next!=NULL)
+            free_cipher_list((cipher_node *)ciphers_head->next);
+        free(ciphers_head);
+    }
 }
 
 static cipher_node *attach_ciphers(cipher_node *tail,block_cipher_interface *cipher)
 {
-	cipher_node *cp = (cipher_node *)malloc(sizeof(cipher_node));
-	cp->next = NULL;
-	cp->prev = tail;
-	if(tail!=NULL)
-		tail->next = cp;
-	cp->cipher = cipher;
-	return cp;
+    cipher_node *cp = (cipher_node *)malloc(sizeof(cipher_node));
+    cp->next = NULL;
+    cp->prev = tail;
+    if(tail!=NULL)
+        tail->next = cp;
+    cp->cipher = cipher;
+    return cp;
 }
 
 static void attach_ciphers_to_tail(ctr_context *ctx,block_cipher_interface *cipher)
 {
-	ctx->ciphers_tail = attach_ciphers(ctx->ciphers_tail,cipher);
-	if(ctx->ciphers_head == NULL)
-		ctx->ciphers_head = ctx->ciphers_tail;
+    ctx->ciphers_tail = attach_ciphers(ctx->ciphers_tail,cipher);
+    if(ctx->ciphers_head == NULL)
+        ctx->ciphers_head = ctx->ciphers_tail;
 }
 
 void ctr_encrypt(ctr_context *context, uint8_t *data, int offset, int length, uint8_t *iv)
 {
     uint8_t current_iv[CTR_BLOCK_SIZE];
     unsigned int used;
-    cipher_node *cn = context->ciphers_head;  
+    cipher_node *cn = context->ciphers_head;
 
     while(cn!=NULL)
     {
-    	memcpy(current_iv, iv, CTR_BLOCK_SIZE);
+        memcpy(current_iv, iv, CTR_BLOCK_SIZE);
         used = 0;
         ctr_encrypt_buffer(cn->cipher, data + offset, (size_t) length, current_iv, &used);
         cn = cn->next;
@@ -180,11 +180,11 @@ void ctr_decrypt(ctr_context *context, uint8_t *data, int offset, int length, ui
 {
     uint8_t current_iv[CTR_BLOCK_SIZE];
     unsigned int used;
-    cipher_node *cn = context->ciphers_head;  
+    cipher_node *cn = context->ciphers_head;
 
     while(cn!=NULL)
     {
-    	memcpy(current_iv, iv, CTR_BLOCK_SIZE);
+        memcpy(current_iv, iv, CTR_BLOCK_SIZE);
         used = 0;
         ctr_decrypt_buffer(cn->cipher, data + offset, (size_t) length, current_iv, &used);
         cn = cn->next;
@@ -194,55 +194,55 @@ void ctr_decrypt(ctr_context *context, uint8_t *data, int offset, int length, ui
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *jvm, void *reserved)
 {
-	return JNI_VERSION_1_2;
+    return JNI_VERSION_1_2;
 }
 
 
 JNIEXPORT void JNICALL Java_com_sovworks_eds_crypto_modes_CTR_attachNativeCipher(JNIEnv *env, jobject obj, jlong context, jlong cipherPtr)
 {
-	ctr_context *ctx = (ctr_context *)context;
-	attach_ciphers_to_tail(ctx,(block_cipher_interface *)cipherPtr);
+    ctr_context *ctx = (ctr_context *)context;
+    attach_ciphers_to_tail(ctx,(block_cipher_interface *)cipherPtr);
 }
 
 JNIEXPORT jint JNICALL Java_com_sovworks_eds_crypto_modes_CTR_encrypt(JNIEnv *env, jobject obj, jbyteArray data, jint offset, jint length, jbyteArray iv, jlong context)
 {
-	jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
-	if(raw_data == NULL)
-		return -1;
-	jbyte *raw_iv = (*env)->GetPrimitiveArrayCritical(env,iv,NULL);
-	if(raw_iv == NULL)
-	{
-		(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
-		return -1;
-	}
+    jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
+    if(raw_data == NULL)
+        return -1;
+    jbyte *raw_iv = (*env)->GetPrimitiveArrayCritical(env,iv,NULL);
+    if(raw_iv == NULL)
+    {
+        (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+        return -1;
+    }
     ctr_encrypt((ctr_context *)context,(uint8_t *)raw_data, offset, length, (uint8_t *)raw_iv);
     (*env)->ReleasePrimitiveArrayCritical(env,iv,raw_iv,0);
-	(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);	
-	return 0;
+    (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+    return 0;
 }
 
 JNIEXPORT jint JNICALL Java_com_sovworks_eds_crypto_modes_CTR_decrypt(JNIEnv *env, jobject obj, jbyteArray data, jint offset, jint length, jbyteArray iv, jlong context)
-{	
-	jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
-	if(raw_data == NULL)
-		return -1;
-	jbyte *raw_iv = (*env)->GetPrimitiveArrayCritical(env,iv,NULL);
-	if(raw_iv == NULL)
-	{
-		(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
-		return -1;
-	}
+{
+    jbyte *raw_data = (*env)->GetPrimitiveArrayCritical(env,data,NULL);
+    if(raw_data == NULL)
+        return -1;
+    jbyte *raw_iv = (*env)->GetPrimitiveArrayCritical(env,iv,NULL);
+    if(raw_iv == NULL)
+    {
+        (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+        return -1;
+    }
     ctr_decrypt((ctr_context *)context,(uint8_t *)raw_data, offset, length, (uint8_t *)raw_iv);
     (*env)->ReleasePrimitiveArrayCritical(env,iv,raw_iv,0);
-	(*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
-	return 0;
+    (*env)->ReleasePrimitiveArrayCritical(env,data,raw_data,0);
+    return 0;
 }
 
 JNIEXPORT void JNICALL Java_com_sovworks_eds_crypto_modes_CTR_closeContext(JNIEnv *env, jobject obj, jlong context)
 {
-	if((void *)context!=NULL)
-	{
-		free_cipher_list(((ctr_context *)context)->ciphers_head);
-		free((void *)context);
-	}
+    if((void *)context!=NULL)
+    {
+        free_cipher_list(((ctr_context *)context)->ciphers_head);
+        free((void *)context);
+    }
 }

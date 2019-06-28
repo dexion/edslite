@@ -31,10 +31,10 @@ public abstract class ChangeEDSLocationPasswordBaseTask extends TaskFragment
     @Override
     protected void doWork(TaskState state) throws Exception
     {
-		changeLocationPassword();
-	}
+        changeLocationPassword();
+    }
 
-	@Override
+    @Override
     protected TaskCallbacks getTaskCallbacks(Activity activity)
     {
         final EDSLocationSettingsFragment f = (EDSLocationSettingsFragment) getFragmentManager().findFragmentByTag(SettingsBaseActivity.SETTINGS_FRAGMENT_TAG);
@@ -59,5 +59,5 @@ public abstract class ChangeEDSLocationPasswordBaseTask extends TaskFragment
         };
     }
 
-	protected abstract void changeLocationPassword() throws IOException, ApplicationException;
+    protected abstract void changeLocationPassword() throws IOException, ApplicationException;
 }

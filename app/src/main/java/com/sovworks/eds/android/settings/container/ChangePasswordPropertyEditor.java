@@ -19,11 +19,11 @@ public class ChangePasswordPropertyEditor extends ButtonPropertyEditor implement
         super(settingsFragment, R.string.change_container_password, 0, R.string.enter_new_password);
     }
 
-	@Override
-	public EDSLocationSettingsFragment getHost()
-	{
-		return (EDSLocationSettingsFragment) super.getHost();
-	}
+    @Override
+    public EDSLocationSettingsFragment getHost()
+    {
+        return (EDSLocationSettingsFragment) super.getHost();
+    }
 
     @Override
     protected void onButtonClick()

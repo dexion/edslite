@@ -16,7 +16,7 @@ public class EDSLocationOpenerFragment extends LocationOpenerFragment implements
 
     public static class OpenLocationTaskFragment extends LocationOpenerFragment.OpenLocationTaskFragment
     {
-		@Override
+        @Override
         protected void openLocation(Openable location, Bundle param) throws Exception
         {
             if(!location.isOpen())
@@ -69,8 +69,8 @@ public class EDSLocationOpenerFragment extends LocationOpenerFragment implements
     }
 
     @Override
-	protected TaskFragment getOpenLocationTask()
-	{
-		return new OpenLocationTaskFragment();
-	}
+    protected TaskFragment getOpenLocationTask()
+    {
+        return new OpenLocationTaskFragment();
+    }
 }

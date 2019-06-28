@@ -23,19 +23,19 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-	signingConfigs {
+    signingConfigs {
         debug {
             storeFile file('../misc/keys.keystore')
             storePassword 'android'
             keyAlias 'eds-debug-key'
             keyPassword 'android'
         }
-    }    
+    }
 
     flavorDimensions "fullOrLite", "licCheckType", "inet", "fsm"
 
     productFlavors {
-        
+
         lite {
             dimension "fullOrLite"
             applicationId "com.sovworks.edslite"
@@ -74,7 +74,7 @@ android {
     }
 
     buildTypes {
-        
+
         debug {
             signingConfig signingConfigs.debug
             externalNativeBuild {
@@ -137,7 +137,7 @@ dependencies {
 apply from: 'build-full.gradle'
 
 if (file('build-local').exists()) {
-	apply from: 'build-local.gradle'
+    apply from: 'build-local.gradle'
 }
 
 //apply from: 'build-local.gradle'

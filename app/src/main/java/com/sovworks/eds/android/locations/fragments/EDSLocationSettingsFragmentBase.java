@@ -55,10 +55,10 @@ public abstract class EDSLocationSettingsFragmentBase extends PropertiesFragment
         _location = container;
     }
 
-	public ActivityResultHandler getResHandler()
-	{
-		return _resHandler;
-	}
+    public ActivityResultHandler getResHandler()
+    {
+        return _resHandler;
+    }
 
     public void onTargetLocationOpened(Bundle openerArgs, Location location)
     {
@@ -85,7 +85,7 @@ public abstract class EDSLocationSettingsFragmentBase extends PropertiesFragment
     }
 
     public void saveExternalSettings()
-	{
+    {
         _location.saveExternalSettings();
     }
 
@@ -355,21 +355,21 @@ public abstract class EDSLocationSettingsFragmentBase extends PropertiesFragment
         ids.add(_propertiesView.addProperty(new UseExternalFileManagerPropertyEditor(this)));
     }
 
-	protected void showInternalSettings()
-	{
-		setInternalPropertiesEnabled(true);
-	}
+    protected void showInternalSettings()
+    {
+        setInternalPropertiesEnabled(true);
+    }
 
     protected void hideInternalSettings()
-	{
-		setInternalPropertiesEnabled(false);
-	}
+    {
+        setInternalPropertiesEnabled(false);
+    }
 
     protected void setInternalPropertiesEnabled(boolean enabled)
-	{
-		_propertiesView.setPropertyState(R.string.free_space, enabled && _locationInfo!=null);
-		_propertiesView.setPropertyState(R.string.total_space, enabled && _locationInfo!=null);
-		_propertiesView.setPropertyState(R.string.change_container_password, enabled);
+    {
+        _propertiesView.setPropertyState(R.string.free_space, enabled && _locationInfo!=null);
+        _propertiesView.setPropertyState(R.string.total_space, enabled && _locationInfo!=null);
+        _propertiesView.setPropertyState(R.string.change_container_password, enabled);
         _propertiesView.setPropertyState(R.string.internal_container_settings, !enabled);
-	}
+    }
 }

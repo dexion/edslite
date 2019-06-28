@@ -5,7 +5,7 @@
 #include <limits.h>
 
 /* Definition of minimum-width integer types
- * 
+ *
  * u8   -> unsigned integer type, at least 8 bits, equivalent to unsigned char
  * u16  -> unsigned integer type, at least 16 bits
  * u32  -> unsigned integer type, at least 32 bits
@@ -112,11 +112,11 @@ typedef signed long long s64;
 #define LENGTHBITS  (8*LENGTHBYTES) /* 256 */
 
 typedef struct NESSIEstruct {
-	u8  bitLength[LENGTHBYTES]; /* global number of hashed bits (256-bit counter) */
-	u8  buffer[WBLOCKBYTES];	/* buffer of data to hash */
-	int bufferBits;		        /* current number of bits on the buffer */
-	int bufferPos;		        /* current (possibly incomplete) byte slot on the buffer */
-	u64 hash[DIGESTBYTES/8];    /* the hashing state */
+    u8  bitLength[LENGTHBYTES]; /* global number of hashed bits (256-bit counter) */
+    u8  buffer[WBLOCKBYTES];    /* buffer of data to hash */
+    int bufferBits;             /* current number of bits on the buffer */
+    int bufferPos;              /* current (possibly incomplete) byte slot on the buffer */
+    u64 hash[DIGESTBYTES/8];    /* the hashing state */
 } NESSIEstruct;
 
 // -------------
@@ -125,7 +125,7 @@ typedef NESSIEstruct WHIRLPOOL_CTX;
 
 void WHIRLPOOL_add(const unsigned char * const source, uint32_t sourceBits, struct NESSIEstruct * const structpointer);
 void WHIRLPOOL_finalize(struct NESSIEstruct * const structpointer, unsigned char * const result);
-void WHIRLPOOL_init(struct NESSIEstruct * const structpointer); 
+void WHIRLPOOL_init(struct NESSIEstruct * const structpointer);
 
 
 #endif

@@ -19,8 +19,8 @@ public abstract class ChangeContainerPasswordTaskBase extends ChangeEDSLocationP
     public static final String TAG = "com.sovworks.eds.android.tasks.ChangeContainerPasswordTask";
     //public static final String ARG_FIN_ACTIVITY = "fin_activity";
 
-	@Override
-	protected void changeLocationPassword() throws IOException, ApplicationException
+    @Override
+    protected void changeLocationPassword() throws IOException, ApplicationException
     {
         ContainerLocation cont = (ContainerLocation)_location;
         setContainerPassword(cont);
@@ -34,9 +34,9 @@ public abstract class ChangeContainerPasswordTaskBase extends ChangeEDSLocationP
         {
             io.close();
         }
-	}
+    }
 
-	protected void setContainerPassword(ContainerLocation container) throws IOException
+    protected void setContainerPassword(ContainerLocation container) throws IOException
     {
         VolumeLayout vl = container.getEdsContainer().getVolumeLayout();
         Bundle args  = getArguments();

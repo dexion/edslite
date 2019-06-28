@@ -14,4 +14,4 @@ public interface EncryptedFileLayout extends Closeable
     FileEncryptionEngine getEngine();
 
     void setEncryptionEngineIV(FileEncryptionEngine eng, long decryptedVolumeOffset);
-}    
+}

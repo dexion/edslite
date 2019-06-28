@@ -14,7 +14,7 @@ public class ContainerListFragmentBase extends LocationListBaseFragment
     protected void loadLocations()
     {
         _locationsList.clear();
-		for(EDSLocation loc: LocationsManager.getLocationsManager(getActivity()).getLoadedEDSLocations(true))
+        for(EDSLocation loc: LocationsManager.getLocationsManager(getActivity()).getLoadedEDSLocations(true))
                 _locationsList.add(new ContainerInfo(loc));
     }
 

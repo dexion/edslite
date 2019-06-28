@@ -14,11 +14,11 @@
         style="@style/DrawerMainIcon.Sub"
         android:contentDescription="@string/location_type"/>
     <TextView
-		android:id="@android:id/text1"
-		android:layout_toRightOf="@android:id/icon"
+    android:id="@android:id/text1"
+    android:layout_toRightOf="@android:id/icon"
         android:layout_toEndOf="@android:id/icon"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-		style="@style/DrawerMainTitle.Sub" />
+    style="@style/DrawerMainTitle.Sub" />
 </RelativeLayout>

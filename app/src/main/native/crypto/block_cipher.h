@@ -7,9 +7,9 @@ typedef int (*block_func)(const uint8_t *in, uint8_t *out, void *context);
 
 typedef struct
 {
-	block_decryptor decrypt;
-	block_encryptor encrypt;
-	void *context;
+    block_decryptor decrypt;
+    block_encryptor encrypt;
+    void *context;
 } block_cipher_interface;
 
 

@@ -152,7 +152,7 @@ public abstract class FsBrowserRecord extends CachedPathInfoBase implements Brow
         }
 
         TextView tv = view.findViewById(android.R.id.text1);
-     	tv.setText(getName());
+        tv.setText(getName());
 
         ImageView iv = view.findViewById(android.R.id.icon);
         iv.setImageDrawable(getDefaultIcon());
@@ -201,27 +201,27 @@ public abstract class FsBrowserRecord extends CachedPathInfoBase implements Brow
 
     @Override
     public boolean allowSelect()
-	{
+    {
         return true;
-	}
-
-	@Override
-	public boolean open() throws Exception
-	{		
-		return false;
-	}
+    }
 
     @Override
-	public boolean openInplace() throws Exception
-	{
-		return false;
-	}
-	
-	@Override
-	public void setHostActivity(FileManagerActivity host)
-	{
-		_host = host;
-	}
+    public boolean open() throws Exception
+    {
+        return false;
+    }
+
+    @Override
+    public boolean openInplace() throws Exception
+    {
+        return false;
+    }
+
+    @Override
+    public void setHostActivity(FileManagerActivity host)
+    {
+        _host = host;
+    }
 
     @Override
     public boolean needLoadExtendedInfo()
@@ -237,16 +237,16 @@ public abstract class FsBrowserRecord extends CachedPathInfoBase implements Brow
     }
 
     public FsBrowserRecord(Context context)
-	{
+    {
         _context = context;
-	}
+    }
 
-	protected final Context _context;
-	protected String _locationId;
-	protected FileManagerActivity _host;
+    protected final Context _context;
+    protected String _locationId;
+    protected FileManagerActivity _host;
     protected Drawable _miniIcon;
 
-	protected abstract Drawable getDefaultIcon();
+    protected abstract Drawable getDefaultIcon();
 
     protected FileListViewFragment getHostFragment()
     {

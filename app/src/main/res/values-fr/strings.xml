@@ -117,7 +117,7 @@
   <string name="overwrite_temp_files_with_random_data_desc">Si cette option est activée, alors un fichier temporaire sera remplacé par des données aléatoires avant qu\'il soit effacé.</string>
   <string name="auto_close_container">Fermeture automatique container</string>
   <string name="auto_close_container_desc">Fermeture automatique du container après qu\'aucune donnée n\'y ait été lue/écrite pendant un temps spécifié (en minutes).</string>
-  <string name="extension_mime_override">	Forcer le type mime du fichier en se basant sur son extension.</string>
+  <string name="extension_mime_override"> Forcer le type mime du fichier en se basant sur son extension.</string>
   <string name="extension_mime_override_desc">Vous devez entrer un type mimi par ligne. Ex, \"txt text/plain\".</string>
   <string name="internal_image_viewer_mode">Visionneuse d\'image interne</string>
   <string name="internal_image_viewer_mode_desc">Sélectionnez quand vous voulez utiliser la visionneuse d\'image interne.</string>

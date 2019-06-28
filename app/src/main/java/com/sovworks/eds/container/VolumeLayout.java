@@ -20,7 +20,7 @@ public interface VolumeLayout extends EncryptedFileLayout
 
     void writeHeader(RandomAccessIO output) throws  IOException, ApplicationException;
 
-	void formatFS(RandomAccessIO output, FileSystemInfo fsInfo) throws ApplicationException, IOException;
+    void formatFS(RandomAccessIO output, FileSystemInfo fsInfo) throws ApplicationException, IOException;
 
     void setEngine(FileEncryptionEngine enc);
 
@@ -37,4 +37,4 @@ public interface VolumeLayout extends EncryptedFileLayout
     List<MessageDigest> getSupportedHashFuncs();
 
     void setOpeningProgressReporter(ContainerOpeningProgressReporter reporter);
-}    
+}
